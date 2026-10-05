@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ainhoa Club Card</title>
+<meta name="theme-color" content="#252A1C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Club Card">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+/* Layout: una columna angosta (máx 520px), tarjeta de socia arriba, todo lo demás en blanco con filetes finos. */
+:root {
+  --paper: #FFFFFF;
+  --bone: #F7F4EF;
+  --bone2: #EFEAE2;
+  --line: #E6DFD4;
+  --ink: #252A1C;
+  --ink2: #3A4030;
+  --rose: #BC7779;
+  --rose-soft: #F6EBEA;
+  --earth: #69543D;
+  --cacao: #4F2817;
+  --mute: #8A8274;
+  --ok: #4C7A5E;
+  --ok-soft: #EDF4EF;
+  --warn: #8A6A1F;
+  --warn-soft: #FBF4E4;
+  --bad: #A4504F;
+  --bad-soft: #F8ECEB;
+  --display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --body: 'DM Sans', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --r: 12px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); }
+body { font-family: var(--body); font-size: 15px; line-height: 1.45; font-weight: 400; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+.wrap { max-width: 520px; margin: 0 auto; padding-inline: 16px; padding-block: 18px 96px; }
+
+/* ---------- encabezado (igual a las otras apps de Ainhoa) ---------- */
+.top { background: var(--ink); color: #F3EEE6; padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 12px; text-align: center; position: relative; }
+.brand { font-family: var(--display); font-weight: 300; font-size: 27px; letter-spacing: .2em; line-height: 1; text-transform: lowercase; }
+.brand-sub { font-size: 9.5px; letter-spacing: .32em; text-transform: uppercase; color: #D9A9AA; margin-top: 6px; }
+.top-btn { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); background: none; border: 1px solid rgba(243,238,230,.25); color: #F3EEE6; border-radius: 999px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 6px 11px; }
+.top-btn.l { left: 12px; } .top-btn.r { right: 12px; }
+.demo-bar { background: var(--rose-soft); color: var(--cacao); font-size: 12px; text-align: center; padding: 7px 16px; border-bottom: 1px solid var(--line); }
+
+/* ---------- tipografía ---------- */
+.eyebrow { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--mute); font-weight: 500; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; color: var(--ink); }
+h1 { font-size: 34px; line-height: 1.05; }
+h2 { font-size: 25px; line-height: 1.1; }
+h3 { font-size: 19px; line-height: 1.2; }
+.lead { color: var(--ink2); font-size: 15px; margin: 8px 0 0; }
+.small { font-size: 12.5px; color: var(--mute); }
+.num { font-variant-numeric: tabular-nums; }
+.sec { margin-top: 30px; }
+.sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--line); margin-bottom: 4px; }
+
+/* ---------- botones ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--r); border: 1px solid var(--ink); background: var(--ink); color: #F6F1E9; font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; padding: 15px 18px; min-height: 50px; width: 100%; text-decoration: none; transition: background .15s, transform .1s; }
+.btn:active { transform: scale(.985); }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn.ghost { background: var(--paper); color: var(--ink); border-color: var(--line); }
+.btn.rose { background: var(--rose); border-color: var(--rose); color: #fff; }
+.btn.sm { min-height: 38px; padding: 9px 14px; font-size: 10.5px; width: auto; }
+.btn.big { min-height: 62px; font-size: 13px; }
+.link { background: none; border: 0; color: var(--earth); text-decoration: underline; text-underline-offset: 3px; font-size: 13px; padding: 4px 0; }
+.row { display: flex; gap: 10px; }
+.row > * { flex: 1; min-width: 0; }
+.stack { display: grid; gap: 10px; }
+
+/* ---------- formularios ---------- */
+.field { display: grid; gap: 6px; }
+.field label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); font-weight: 500; }
+.field .opt { text-transform: none; letter-spacing: 0; font-size: 11px; }
+input[type=text], input[type=tel], input[type=number], input[type=password], input[type=datetime-local], textarea, select {
+  width: 100%; background: var(--bone); border: 1px solid var(--line); border-radius: 10px; padding: 13px 14px; font-size: 16px; outline: none; -webkit-appearance: none; appearance: none; min-width: 0; }
+input:focus, textarea:focus, select:focus { border-color: var(--earth); background: var(--paper); }
+textarea { resize: vertical; min-height: 64px; }
+.form { display: grid; gap: 14px; }
+.msg { font-size: 13px; padding: 11px 13px; border-radius: 10px; }
+.msg.bad { background: var(--bad-soft); color: var(--bad); }
+.msg.ok { background: var(--ok-soft); color: var(--ok); }
+.msg.warn { background: var(--warn-soft); color: var(--warn); }
+.msg:empty { display: none; }
+
+/* ---------- tarjeta de socia ---------- */
+.mcard { position: relative; aspect-ratio: 1.586; max-width: 100%; border-radius: 16px; background: var(--ink); color: #F3EEE6; overflow: hidden; padding: 20px 22px; display: flex; flex-direction: column; justify-content: space-between;
+  background-image: radial-gradient(120% 80% at 100% 0%, rgba(188,119,121,.22), transparent 55%), radial-gradient(90% 70% at 0% 100%, rgba(105,84,61,.35), transparent 60%);
+  box-shadow: 0 18px 40px -22px rgba(37,42,28,.65); }
+.mcard::before { content: ''; position: absolute; inset: 9px; border: 1px solid rgba(243,238,230,.16); border-radius: 10px; pointer-events: none; }
+.mcard.vip { background-color: var(--cacao); }
+.mcard.vip::before { border-color: rgba(217,169,170,.5); }
+.mc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; position: relative; }
+.mc-brand { font-family: var(--display); font-weight: 300; font-size: 23px; letter-spacing: .24em; line-height: 1; }
+.mc-kind { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: #D9A9AA; text-align: right; line-height: 1.6; }
+.mc-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; position: relative; }
+.mc-name { font-family: var(--display); font-style: italic; font-size: 27px; line-height: 1.05; min-width: 0; overflow-wrap: anywhere; }
+.mc-meta { text-align: right; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(243,238,230,.7); line-height: 1.7; white-space: nowrap; }
+.mc-meta b { color: #F3EEE6; font-weight: 500; letter-spacing: .1em; font-size: 12px; }
+.mc-done { display: flex; gap: 5px; justify-content: flex-end; margin-bottom: 4px; }
+.mc-done i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(243,238,230,.55); }
+.mc-done i.on { background: #D9A9AA; border-color: #D9A9AA; }
+
+/* ---------- progreso y stamps ---------- */
+.progress { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: 26px; }
+.count { font-family: var(--display); font-size: 58px; line-height: .85; font-weight: 400; letter-spacing: -.01em; white-space: nowrap; }
+.count small { font-size: 26px; color: var(--mute); }
+.count-label { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--mute); margin-top: 8px; }
+.next { text-align: right; max-width: 60%; font-size: 14px; color: var(--ink2); }
+.next b { font-weight: 500; color: var(--ink); }
+.grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px 8px; margin-top: 22px; padding: 20px 14px 14px; background: var(--bone); border-radius: 14px; }
+.slot { display: grid; justify-items: center; gap: 5px; min-width: 0; }
+.slot .hole { width: 100%; max-width: 50px; aspect-ratio: 1; border-radius: 50%; border: 1px dashed #CFC6B8; display: grid; place-items: center; position: relative; }
+.slot.ms .hole { border: 1.5px solid var(--rose); background: var(--paper); }
+.slot .hole .n { font-size: 11px; color: #B5AC9F; font-variant-numeric: tabular-nums; }
+.slot.ms .hole .n { color: var(--rose); font-weight: 500; }
+.slot .lbl { font-size: 8.5px; letter-spacing: .06em; color: var(--rose); text-align: center; line-height: 1.2; min-height: 11px; text-transform: uppercase; font-weight: 500; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.slot .stamp { position: absolute; inset: -3px; }
+.slot .stamp svg { width: 100%; height: 100%; display: block; }
+.stamp.new { animation: stampIn .55s cubic-bezier(.2,.9,.25,1.15) both; }
+@keyframes stampIn { 0% { opacity: 0; transform: scale(1.9) rotate(-18deg); } 60% { opacity: 1; } 100% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)); } }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 12px; font-size: 11.5px; color: var(--mute); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend svg { width: 16px; height: 16px; }
+
+/* ---------- banner campaña ---------- */
+.camp { margin-top: 16px; border-radius: 12px; background: var(--rose-soft); padding: 13px 15px; display: flex; gap: 12px; align-items: center; }
+.camp .spark { font-family: var(--display); font-size: 26px; color: var(--rose); line-height: 1; }
+.camp b { display: block; font-family: var(--display); font-size: 19px; font-weight: 500; color: var(--cacao); line-height: 1.15; }
+.camp span { font-size: 12.5px; color: var(--cacao); opacity: .85; }
+
+/* ---------- listas ---------- */
+.list { display: grid; }
+.li { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.li:last-child { border-bottom: 0; }
+.li .grow { flex: 1; min-width: 0; }
+.li .t { font-size: 14.5px; color: var(--ink); }
+.li .s { font-size: 12px; color: var(--mute); margin-top: 1px; }
+.li .d { font-size: 11px; color: var(--mute); font-variant-numeric: tabular-nums; width: 40px; flex-shrink: 0; letter-spacing: .04em; }
+.li .plus { font-family: var(--display); font-size: 22px; font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; }
+.li .plus.neg { color: var(--bad); }
+.li.off .t, .li.off .plus { text-decoration: line-through; color: var(--mute); }
+.li.tap { cursor: pointer; }
+.dot { width: 22px; height: 22px; flex-shrink: 0; }
+.dot svg { width: 100%; height: 100%; display: block; }
+.pill { display: inline-block; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 8px; border-radius: 999px; font-weight: 500; white-space: nowrap; border: 1px solid var(--line); color: var(--mute); }
+.pill.ok { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
+.pill.rose { background: var(--rose-soft); color: var(--cacao); border-color: transparent; }
+.pill.warn { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+.pill.ink { background: var(--ink); color: #F3EEE6; border-color: var(--ink); }
+
+/* beneficios */
+.ben { border: 1px solid var(--line); border-radius: 14px; padding: 15px 16px; display: grid; gap: 4px; }
+.ben.ready { border-color: var(--rose); background: var(--rose-soft); }
+.ben .bt { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.ben h3 { font-size: 21px; }
+.ben p { margin: 0; font-size: 13.5px; color: var(--ink2); }
+.ladder { display: grid; gap: 0; }
+.rung { display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.rung:last-child { border-bottom: 0; }
+.rung .at { font-family: var(--display); font-size: 26px; width: 34px; text-align: center; color: var(--rose); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.rung.done .at { color: var(--mute); }
+.rung .grow { flex: 1; min-width: 0; }
+
+/* ---------- hoja inferior / modal ---------- */
+.sheet-bg { position: fixed; inset: 0; background: rgba(37,42,28,.42); z-index: 50; display: grid; align-items: end; animation: fade .2s; }
+.sheet { background: var(--paper); border-radius: 20px 20px 0 0; padding: 22px 18px calc(22px + env(safe-area-inset-bottom, 0px)); max-height: 92vh; overflow: auto; width: 100%; max-width: 560px; margin: 0 auto; animation: up .25s cubic-bezier(.2,.8,.2,1); }
+.sheet-h { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 12px; }
+.x { background: var(--bone); border: 0; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; color: var(--ink); flex-shrink: 0; }
+@keyframes up { from { transform: translateY(30px); opacity: 0; } }
+@keyframes fade { from { opacity: 0; } }
+.qrbox { display: grid; justify-items: center; gap: 10px; padding: 10px 0 6px; }
+.qrbox .qr { width: min(270px, 78vw); aspect-ratio: 1; padding: 14px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.qrbox .qr svg, .qrbox .qr img { width: 100%; height: 100%; display: block; }
+
+/* ---------- admin ---------- */
+.tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--paper); border-top: 1px solid var(--line); display: flex; justify-content: center; padding-bottom: env(safe-area-inset-bottom, 0px); }
+.tabs-in { display: flex; width: 100%; max-width: 560px; }
+.tab { flex: 1; background: none; border: 0; padding: 11px 4px 12px; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); display: grid; justify-items: center; gap: 4px; font-weight: 500; }
+.tab svg { width: 22px; height: 22px; }
+.tab.on { color: var(--ink); }
+.tab.on svg { stroke: var(--rose); }
+.search { display: flex; gap: 8px; }
+.search input { flex: 1; font-size: 18px; padding: 15px 16px; }
+.search .btn { width: auto; min-width: 58px; padding: 0 14px; }
+.who { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 14px; background: var(--bone); }
+.who .grow { flex: 1; min-width: 0; }
+.who h2 { font-size: 26px; overflow-wrap: anywhere; }
+.mini { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.mini i { width: 11px; height: 11px; border-radius: 50%; border: 1px solid #CFC6B8; }
+.mini i.on { background: var(--ink); border-color: var(--ink); }
+.mini i.b { background: var(--rose); border-color: var(--rose); }
+.mini i.ms { border-color: var(--rose); border-width: 1.5px; }
+.stepper { display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; gap: 10px; }
+.stepper button { height: 64px; border-radius: 16px; border: 1px solid var(--line); background: var(--paper); font-size: 28px; line-height: 1; color: var(--ink); }
+.stepper .val { text-align: center; font-family: var(--display); font-size: 64px; line-height: 1; font-variant-numeric: tabular-nums; }
+.stepper .val small { display: block; font-family: var(--body); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); margin-top: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 10px 14px; font-size: 13.5px; min-height: 42px; }
+.chip.on { background: var(--ink); color: #F3EEE6; border-color: var(--ink); }
+.chip.q { min-width: 46px; font-variant-numeric: tabular-nums; }
+.calc { border-radius: 14px; border: 1px solid var(--line); padding: 14px 16px; display: grid; gap: 6px; }
+.calc .tot { display: flex; justify-content: space-between; align-items: baseline; }
+.calc .tot b { font-family: var(--display); font-size: 38px; font-weight: 500; line-height: 1; }
+.calc .ln { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink2); }
+.calc.x2 { border-color: var(--rose); background: var(--rose-soft); }
+.result { text-align: center; padding: 8px 0 4px; display: grid; justify-items: center; gap: 8px; }
+.result .bigstamp { width: 110px; height: 110px; }
+.result .bigstamp svg { width: 100%; height: 100%; }
+.result h2 { font-size: 34px; }
+[hidden] { display: none !important; }
+.unlock { background: var(--rose-soft); border-radius: 12px; padding: 12px 14px; color: var(--cacao); font-size: 14px; width: 100%; text-align: left; }
+.unlock b { font-family: var(--display); font-size: 19px; font-weight: 500; }
+.kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.kpi { padding: 14px 4px 13px; border-bottom: 1px solid var(--line); min-width: 0; }
+.kpi:nth-child(odd) { padding-right: 12px; border-right: 1px solid var(--line); }
+.kpi:nth-child(even) { padding-left: 14px; }
+.kpi b { display: block; font-family: var(--display); font-size: 34px; font-weight: 400; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi span { font-size: 11.5px; color: var(--mute); }
+.bars { display: grid; gap: 9px; margin-top: 10px; }
+.bar { display: grid; grid-template-columns: 70px 1fr 44px; gap: 10px; align-items: center; font-size: 12.5px; }
+.bar .tr { height: 10px; background: var(--bone2); border-radius: 6px; position: relative; overflow: visible; }
+.bar .fl { height: 100%; background: var(--ink); border-radius: 6px; }
+.bar .ref { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--rose); border-radius: 1px; }
+.bar .v { text-align: right; font-variant-numeric: tabular-nums; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); font-weight: 500; padding: 8px 6px 8px 0; border-bottom: 1px solid var(--line); }
+.tbl td { padding: 10px 6px 10px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.tbl td:not(:first-child), .tbl th:not(:first-child) { text-align: right; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.seg button { border: 0; background: none; border-radius: 999px; padding: 7px 13px; font-size: 12px; color: var(--mute); }
+.seg button.on { background: var(--ink); color: #F3EEE6; }
+.empty { text-align: center; color: var(--mute); font-size: 13.5px; padding: 28px 10px; }
+.spin { width: 22px; height: 22px; border: 2px solid var(--line); border-top-color: var(--earth); border-radius: 50%; animation: rot .7s linear infinite; margin: 30px auto; }
+@keyframes rot { to { transform: rotate(360deg); } }
+.toast { position: fixed; left: 50%; bottom: calc(86px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: #F3EEE6; font-size: 13.5px; padding: 11px 16px; border-radius: 12px; z-index: 80; max-width: calc(100% - 32px); animation: up .2s; }
+.scan video { width: 100%; border-radius: 14px; background: #000; aspect-ratio: 1; object-fit: cover; }
+.home-hero { padding: 26px 0 6px; }
+.home-card { margin: 26px 0 28px; transform: rotate(-2deg); }
+.kbd { font-family: var(--display); font-size: 40px; letter-spacing: .5em; text-align: center; padding-left: .5em; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media (max-width: 380px) { .count { font-size: 50px; } .mc-name { font-size: 23px; } .grid { gap: 14px 6px; padding-inline: 10px; } }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<script>
+/* ============================================================
+   AINHOA CLUB CARD · Lógica central
+   Este mismo código corre en el Apps Script (backend real)
+   y en la app en modo demo. Si cambiás una regla, cambiala acá.
+   ============================================================ */
+var CORE = (function () {
+
+  var SCHEMA = {
+    Clientas:    ['ID', 'Token', 'Nombre', 'Apellido', 'Telefono', 'Cumple', 'Instagram', 'FechaAlta', 'Origen', 'CreadaPor', 'Notas', 'Activa'],
+    Movimientos: ['ID', 'FechaHora', 'ClientaID', 'Clienta', 'Tipo', 'Motivo', 'Canal', 'Prendas', 'Stamps', 'Detalle', 'Monto', 'Campana', 'Admin', 'RefID', 'Notas', 'Anulado'],
+    Beneficios:  ['Stamps', 'Nombre', 'Descripcion', 'DiasVigencia', 'Activo'],
+    Canjes:      ['ID', 'ClientaID', 'Clienta', 'Beneficio', 'Descripcion', 'Stamps', 'Tarjeta', 'FechaDesbloqueo', 'Vence', 'Estado', 'FechaCanje', 'CanjeadoPor', 'MovimientoID', 'Notas'],
+    Campanas:    ['ID', 'Nombre', 'Desde', 'Hasta', 'Multiplicador', 'BonusCompra', 'BonusAsistencia', 'Canales', 'Mensaje', 'Activa', 'CreadaPor'],
+    Equipo:      ['Nombre', 'PIN', 'Rol', 'Activo'],
+    Config:      ['Clave', 'Valor', 'Descripcion']
+  };
+  var SHEET_NAMES = { Clientas: 'Clientas', Movimientos: 'Movimientos', Beneficios: 'Beneficios', Canjes: 'Beneficios ganados', Campanas: 'Campañas', Equipo: 'Equipo', Config: 'Config' };
+  var DATE_COLS = { FechaAlta: 1, FechaHora: 1, FechaDesbloqueo: 1, Vence: 1, FechaCanje: 1, Desde: 1, Hasta: 1 };
+  var TEXT_COLS = { Token: 1, Telefono: 1, Cumple: 1, PIN: 1, ID: 1, ClientaID: 1, RefID: 1, MovimientoID: 1 };
+
+  var CANALES = ['Showroom', 'Feria', 'Tanda online', 'Web', 'Privé', 'El Círculo'];
+  var MOTIVOS_BONUS = ['Feria', 'Privé', 'Cumpleaños', 'El Círculo', 'Evento', 'Trajo amiga', 'Última Oportunidad', 'Otro'];
+
+  var DEFAULT_CONFIG = [
+    ['TamanoTarjeta', 15, 'Cantidad de stamps que tiene una tarjeta. Al completarla arranca una nueva.'],
+    ['StampsBienvenida', 1, 'Stamps de regalo al crear la Club Card.'],
+    ['ExtraDesde2Prendas', 1, 'Stamps extra en una compra de 2 o más prendas (0 para desactivar).'],
+    ['MinutosAntiduplicado', 3, 'Si a la misma clienta se le carga otra compra dentro de estos minutos, la app pregunta si es otra compra.'],
+    ['DiasClientaActiva', 60, 'Una clienta cuenta como activa si tuvo movimiento en estos días.'],
+    ['TarjetasParaVIP', 3, 'Tarjetas completas para ser VIP Ainhoa.']
+  ];
+  var DEFAULT_BENEFICIOS = [
+    [5, 'Regalo Ainhoa', 'Un detalle de regalo: difusor para auto, mini perfume o sorpresa Ainhoa.', 60, 'SI'],
+    [10, '10% OFF', '10% en tu próxima compra de 2 o más prendas.', 30, 'SI'],
+    [15, 'Beneficio Premium', 'Elegís: 15% OFF en 2 o más prendas o un regalo premium.', 60, 'SI']
+  ];
+  var DEFAULT_EQUIPO = [['Angie', '1234', 'Dueña', 'SI']];
+
+  var DAY = 86400000;
+  var AR_OFFSET = -3 * 3600000; // Argentina, sin horario de verano
+
+  /* ---------- utilidades ---------- */
+  function err(code, msg) { var e = new Error(msg); e.code = code; e.msg = msg; return e; }
+  function num(v, d) {
+    var s = v === undefined || v === null ? '' : String(v).trim();
+    var n = Number(s.replace(/[^0-9.\-]/g, ''));
+    return s !== '' && isFinite(n) ? n : (d === undefined ? 0 : d);
+  }
+  function str(v) { return v === undefined || v === null ? '' : String(v).trim(); }
+  function norm(s) { return str(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  function yes(v) { var s = norm(v); return s === 'si' || s === 'true' || s === '1' || s === 'x'; }
+  function no(v) { var s = norm(v); return s === 'no' || s === 'false' || s === '0'; }
+  function phone(s) {
+    var d = str(s).replace(/\D/g, '');
+    if (d.indexOf('549') === 0 && d.length > 11) d = d.slice(3);
+    else if (d.indexOf('54') === 0 && d.length > 10) d = d.slice(2);
+    if (d.charAt(0) === '0') d = d.slice(1);
+    if (d.length > 10) d = d.slice(-10);
+    return d;
+  }
+  function maskPhone(p) { p = str(p); return p ? '••• ' + p.slice(-4) : ''; }
+  function dayKey(ms) { return new Date(ms + AR_OFFSET).toISOString().slice(0, 10); }
+  function fmtFecha(ms) { if (!ms) return ''; var d = new Date(ms + AR_OFFSET); return pad(d.getUTCDate()) + '/' + pad(d.getUTCMonth() + 1); }
+  function fmtFechaLarga(ms) { if (!ms) return ''; var d = new Date(ms + AR_OFFSET); return pad(d.getUTCDate()) + '/' + pad(d.getUTCMonth() + 1) + '/' + d.getUTCFullYear(); }
+  function fmtHora(ms) { if (!ms) return ''; var d = new Date(ms + AR_OFFSET); return pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function cfg(store, k) {
+    for (var i = 0; i < store.Config.length; i++) if (str(store.Config[i].Clave) === k) return num(store.Config[i].Valor, def(k));
+    return def(k);
+  }
+  function def(k) { for (var i = 0; i < DEFAULT_CONFIG.length; i++) if (DEFAULT_CONFIG[i][0] === k) return DEFAULT_CONFIG[i][1]; return 0; }
+  function nextId(store, t, prefix, width) {
+    var max = 0, rows = store[t];
+    for (var i = 0; i < rows.length; i++) { var n = parseInt(str(rows[i].ID).replace(/\D/g, ''), 10); if (n > max) max = n; }
+    var s = String(max + 1); while (s.length < width) s = '0' + s; return prefix + s;
+  }
+  function newToken(store) {
+    var abc = 'abcdefghjkmnpqrstuvwxyz23456789', t;
+    do { t = ''; for (var i = 0; i < 10; i++) t += abc.charAt(Math.floor(Math.random() * abc.length)); }
+    while (store.Clientas.some(function (c) { return c.Token === t; }));
+    return t;
+  }
+  function op(store, t, kind, obj, fields) { store._ops = store._ops || []; store._ops.push({ t: t, kind: kind, obj: obj, fields: fields }); }
+  function append(store, t, obj) { store[t].push(obj); op(store, t, 'append', obj); return obj; }
+  function update(store, t, obj, changes) {
+    var f = []; for (var k in changes) { obj[k] = changes[k]; f.push(k); }
+    op(store, t, 'update', obj, f);
+  }
+  function cardNumber(id) { return 'N° ' + str(id).replace(/\D/g, ''); }
+
+  /* ---------- reglas ---------- */
+  function beneficiosActivos(store) {
+    return store.Beneficios.filter(function (b) { return num(b.Stamps) > 0 && !no(b.Activo) && str(b.Nombre); })
+      .sort(function (a, b) { return num(a.Stamps) - num(b.Stamps); });
+  }
+  function campanasActivas(store, now, canal) {
+    return store.Campanas.filter(function (c) {
+      if (!yes(c.Activa)) return false;
+      if (num(c.Desde) && num(c.Desde) > now) return false;
+      if (num(c.Hasta) && num(c.Hasta) < now) return false;
+      if (canal) {
+        var cs = norm(c.Canales);
+        if (cs && cs !== 'todos' && cs.split(',').map(function (x) { return x.trim(); }).indexOf(norm(canal)) < 0) return false;
+      }
+      return true;
+    });
+  }
+  function previewCompra(store, prendas, canal, now) {
+    prendas = Math.floor(num(prendas));
+    var extra2 = prendas >= 2 ? cfg(store, 'ExtraDesde2Prendas') : 0;
+    var best = null, bestVal = prendas;
+    campanasActivas(store, now, canal).forEach(function (c) {
+      var mult = Math.max(1, num(c.Multiplicador, 1)), val = prendas * mult + num(c.BonusCompra);
+      if (val > bestVal) { bestVal = val; best = c; }
+    });
+    var mult = best ? Math.max(1, num(best.Multiplicador, 1)) : 1;
+    var bonusCompra = best ? num(best.BonusCompra) : 0;
+    var lines = [{ t: prendas + (prendas === 1 ? ' prenda' : ' prendas'), n: prendas }];
+    if (mult > 1) lines.push({ t: 'x' + mult + ' · ' + best.Nombre, n: prendas * (mult - 1) });
+    if (bonusCompra) lines.push({ t: best.Nombre, n: bonusCompra });
+    if (extra2) lines.push({ t: 'Por llevar 2 o más', n: extra2 });
+    return { prendas: prendas, mult: mult, extra2: extra2, bonusCompra: bonusCompra, campana: best ? best.Nombre : '', total: prendas * mult + bonusCompra + extra2, lines: lines };
+  }
+
+  function kindOf(canalOMotivo) {
+    var s = norm(canalOMotivo);
+    if (s.indexOf('feria') === 0) return 'feria';
+    if (s.indexOf('prive') === 0) return 'prive';
+    if (s.indexOf('el circulo') === 0 || s === 'circulo') return 'circulo';
+    return '';
+  }
+  function movsDe(store, id) {
+    return store.Movimientos.filter(function (m) { return m.ClientaID === id; })
+      .sort(function (a, b) { return num(a.FechaHora) - num(b.FechaHora) || (str(a.ID) < str(b.ID) ? -1 : 1); });
+  }
+  function cuenta(m) { return !yes(m.Anulado) && m.Tipo !== 'Anulación'; }
+  function totalDe(store, id) { return movsDe(store, id).filter(cuenta).reduce(function (s, m) { return s + num(m.Stamps); }, 0); }
+
+  function textoMov(m) {
+    var p = num(m.Prendas);
+    switch (m.Tipo) {
+      case 'Compra': return 'Compra · ' + p + (p === 1 ? ' prenda' : ' prendas') + (m.Canal ? ' · ' + m.Canal : '');
+      case 'Bonus': return 'Bonus ' + (m.Motivo || '');
+      case 'Bienvenida': return 'Bienvenida al Club';
+      case 'Anulación': return 'Corrección · ' + (m.Motivo || '');
+      default: return m.Motivo || m.Tipo;
+    }
+  }
+
+  function estado(store, c, now) {
+    var size = Math.max(1, cfg(store, 'TamanoTarjeta'));
+    var movs = movsDe(store, c.ID);
+    var units = [], total = 0, compras = 0, prendas = 0;
+    movs.filter(cuenta).forEach(function (m) {
+      var s = num(m.Stamps); total += s;
+      if (m.Tipo === 'Compra') { compras++; prendas += num(m.Prendas); }
+      if (s < 0) { units.splice(Math.max(0, units.length + s)); return; }
+      var principal = m.Tipo === 'Compra' ? (kindOf(m.Canal) || 'compra') : (kindOf(m.Motivo) || 'bonus');
+      var base = m.Tipo === 'Compra' ? Math.min(num(m.Prendas), s) : s;
+      for (var i = 0; i < s; i++) units.push(i < base ? principal : 'bonus');
+    });
+    total = Math.max(0, total);
+    var completas = Math.floor(total / size), pos = total % size;
+    var slots = units.slice(completas * size, completas * size + pos);
+    var bens = beneficiosActivos(store);
+    var ladder = bens.filter(function (b) { return num(b.Stamps) <= size; }).map(function (b) {
+      return { stamps: num(b.Stamps), nombre: str(b.Nombre), descripcion: str(b.Descripcion), alcanzado: num(b.Stamps) <= pos };
+    });
+    var prox = null;
+    for (var i = 0; i < ladder.length; i++) if (ladder[i].stamps > pos) { prox = ladder[i]; break; }
+    var ganados = store.Canjes.filter(function (j) { return j.ClientaID === c.ID; }).map(function (j) {
+      var est = j.Estado;
+      if (est === 'Disponible' && num(j.Vence) && num(j.Vence) < now) est = 'Vencido';
+      return { id: j.ID, nombre: str(j.Beneficio), descripcion: str(j.Descripcion), stamps: num(j.Stamps), tarjeta: num(j.Tarjeta), estado: est,
+        desbloqueado: fmtFechaLarga(num(j.FechaDesbloqueo)), vence: fmtFechaLarga(num(j.Vence)), canjeado: fmtFechaLarga(num(j.FechaCanje)), canjeadoPor: str(j.CanjeadoPor), _t: num(j.FechaDesbloqueo) };
+    }).sort(function (a, b) { return b._t - a._t; });
+    var hist = movs.slice().reverse().map(function (m) {
+      return { id: m.ID, fecha: fmtFecha(num(m.FechaHora)), fechaLarga: fmtFechaLarga(num(m.FechaHora)), hora: fmtHora(num(m.FechaHora)), stamps: num(m.Stamps),
+        texto: textoMov(m), detalle: str(m.Detalle), tipo: m.Tipo, anulado: yes(m.Anulado), admin: str(m.Admin), monto: num(m.Monto), notas: str(m.Notas),
+        kind: m.Tipo === 'Compra' ? (kindOf(m.Canal) || 'compra') : (kindOf(m.Motivo) || 'bonus') };
+    });
+    var ultimaCompra = 0;
+    movs.forEach(function (m) { if (m.Tipo === 'Compra' && cuenta(m)) ultimaCompra = num(m.FechaHora); });
+    return {
+      id: c.ID, numero: cardNumber(c.ID), nombre: str(c.Nombre), apellido: str(c.Apellido),
+      desde: fmtFechaLarga(num(c.FechaAlta)), size: size, total: total, pos: pos, completas: completas,
+      vip: completas >= cfg(store, 'TarjetasParaVIP'), tarjetasParaVip: cfg(store, 'TarjetasParaVIP'),
+      slots: slots, ladder: ladder,
+      proximo: prox ? { stamps: prox.stamps, nombre: prox.nombre, faltan: prox.stamps - pos } : null,
+      faltanTarjeta: size - pos,
+      disponibles: ganados.filter(function (g) { return g.estado === 'Disponible'; }),
+      ganados: ganados, historial: hist, compras: compras, prendas: prendas, ultimaCompra: ultimaCompra,
+      campanas: campanasActivas(store, now).map(publicCamp)
+    };
+  }
+  function publicCamp(c) {
+    return { id: c.ID, nombre: str(c.Nombre), mensaje: str(c.Mensaje), mult: Math.max(1, num(c.Multiplicador, 1)), bonusCompra: num(c.BonusCompra),
+      bonusAsistencia: num(c.BonusAsistencia), canales: str(c.Canales) || 'Todos', hasta: fmtFechaLarga(num(c.Hasta)) + ' ' + fmtHora(num(c.Hasta)) };
+  }
+  function tarjetaPublica(store, c, now) {
+    var e = estado(store, c, now);
+    e.historial = e.historial.filter(function (h) { return !h.anulado && h.tipo !== 'Anulación'; })
+      .map(function (h) { return { fecha: h.fecha, stamps: h.stamps, texto: h.texto, detalle: h.detalle, kind: h.kind }; }).slice(0, 60);
+    e.token = c.Token;
+    return e;
+  }
+  function tarjetaAdmin(store, c, now) {
+    var e = estado(store, c, now);
+    e.telefono = str(c.Telefono); e.instagram = str(c.Instagram); e.cumple = str(c.Cumple); e.token = c.Token; e.notasClienta = str(c.Notas);
+    return e;
+  }
+
+  /* ---------- movimientos ---------- */
+  function registrar(store, c, data, now, admin) {
+    var antes = totalDe(store, c.ID);
+    var m = {
+      ID: nextId(store, 'Movimientos', 'M-', 5), FechaHora: now, ClientaID: c.ID, Clienta: (str(c.Nombre) + ' ' + str(c.Apellido)).trim(),
+      Tipo: data.Tipo, Motivo: data.Motivo || '', Canal: data.Canal || '', Prendas: data.Prendas || '', Stamps: data.Stamps, Detalle: data.Detalle || '',
+      Monto: data.Monto || '', Campana: data.Campana || '', Admin: admin || '', RefID: data.RefID || '', Notas: data.Notas || '', Anulado: ''
+    };
+    append(store, 'Movimientos', m);
+    var despues = antes + num(m.Stamps);
+    var desbloqueados = desbloquear(store, c, antes, despues, m.ID, now);
+    return { mov: m, antes: antes, despues: despues, desbloqueados: desbloqueados };
+  }
+  function desbloquear(store, c, antes, despues, movId, now) {
+    var size = Math.max(1, cfg(store, 'TamanoTarjeta')), bens = beneficiosActivos(store), out = [];
+    for (var k = antes + 1; k <= despues; k++) {
+      var pos = ((k - 1) % size) + 1, tarjeta = Math.floor((k - 1) / size) + 1;
+      bens.forEach(function (b) {
+        if (num(b.Stamps) !== pos) return;
+        var dias = num(b.DiasVigencia);
+        var j = append(store, 'Canjes', {
+          ID: nextId(store, 'Canjes', 'B-', 4), ClientaID: c.ID, Clienta: (str(c.Nombre) + ' ' + str(c.Apellido)).trim(), Beneficio: str(b.Nombre),
+          Descripcion: str(b.Descripcion), Stamps: pos, Tarjeta: tarjeta, FechaDesbloqueo: now, Vence: dias > 0 ? now + dias * DAY : '',
+          Estado: 'Disponible', FechaCanje: '', CanjeadoPor: '', MovimientoID: movId, Notas: ''
+        });
+        out.push({ id: j.ID, nombre: j.Beneficio, descripcion: j.Descripcion, vence: fmtFechaLarga(num(j.Vence)) });
+      });
+    }
+    return out;
+  }
+
+  /* ---------- auth ---------- */
+  function auth(store, pin, rol) {
+    pin = str(pin);
+    if (!pin) throw err('PIN', 'Ingresá tu PIN.');
+    var a = null;
+    store.Equipo.forEach(function (x) { if (str(x.PIN) === pin && !no(x.Activo)) a = x; });
+    if (!a) throw err('PIN', 'PIN incorrecto.');
+    var esDuena = norm(a.Rol).indexOf('duen') === 0 || norm(a.Rol) === 'admin';
+    if (rol === 'duena' && !esDuena) throw err('ROL', 'Esto lo puede hacer solo la dueña.');
+    return { nombre: str(a.Nombre), rol: esDuena ? 'Dueña' : 'Equipo' };
+  }
+  function getClienta(store, id) {
+    var c = null; store.Clientas.forEach(function (x) { if (x.ID === id) c = x; });
+    if (!c) throw err('NOCLI', 'No encontré esa clienta.');
+    return c;
+  }
+  function crearClienta(store, p, now, origen, admin) {
+    var nombre = str(p.nombre), tel = phone(p.telefono);
+    if (nombre.length < 2) throw err('DATOS', 'Falta el nombre.');
+    if (tel.length < 8) throw err('DATOS', 'El WhatsApp no parece completo. Escribilo con característica, ej: 381 555 1234.');
+    var existe = null; store.Clientas.forEach(function (x) { if (phone(x.Telefono) === tel && !no(x.Activa)) existe = x; });
+    if (existe) return { existe: existe };
+    var cumple = str(p.cumple).replace(/[^0-9\/]/g, '');
+    var c = append(store, 'Clientas', {
+      ID: nextId(store, 'Clientas', 'C-', 4), Token: newToken(store), Nombre: cap(nombre), Apellido: cap(str(p.apellido)), Telefono: tel,
+      Cumple: cumple, Instagram: str(p.instagram).replace(/^@/, ''), FechaAlta: now, Origen: origen, CreadaPor: admin || '', Notas: '', Activa: 'SI'
+    });
+    var b = cfg(store, 'StampsBienvenida');
+    if (b > 0) registrar(store, c, { Tipo: 'Bienvenida', Motivo: 'Bienvenida', Stamps: b }, now, admin || 'Alta');
+    return { clienta: c };
+  }
+  function cap(s) { return s.replace(/\s+/g, ' ').split(' ').map(function (w) { return w ? w.charAt(0).toUpperCase() + w.slice(1) : w; }).join(' '); }
+
+  /* ---------- estadísticas ---------- */
+  function stats(store, now, dias) {
+    var desde = dias ? now - dias * DAY : 0;
+    var movs = store.Movimientos.filter(function (m) { return cuenta(m) && num(m.FechaHora) >= desde; });
+    var compras = movs.filter(function (m) { return m.Tipo === 'Compra'; });
+    var porClienta = {}, canal = {}, camp = {}, nombres = {};
+    store.Clientas.forEach(function (c) { nombres[c.ID] = { nombre: (str(c.Nombre) + ' ' + str(c.Apellido)).trim(), numero: cardNumber(c.ID) }; });
+    var stampsCompra = 0, stampsBonus = 0, prendas = 0, montoTot = 0, montoN = 0, feria = 0;
+    movs.forEach(function (m) {
+      var s = num(m.Stamps);
+      if (m.Tipo === 'Compra') { var p = num(m.Prendas); stampsCompra += Math.min(p, s); stampsBonus += Math.max(0, s - p); }
+      else if (s > 0) stampsBonus += s;
+      if (kindOf(m.Tipo === 'Compra' ? m.Canal : m.Motivo) === 'feria') feria += Math.max(0, s);
+    });
+    compras.forEach(function (m) {
+      var p = num(m.Prendas); prendas += p;
+      var pc = porClienta[m.ClientaID] = porClienta[m.ClientaID] || { compras: 0, prendas: 0 };
+      pc.compras++; pc.prendas += p;
+      var k = m.Canal || 'Sin canal'; canal[k] = canal[k] || { canal: k, compras: 0, prendas: 0 }; canal[k].compras++; canal[k].prendas += p;
+      if (m.Campana) { var cc = camp[m.Campana] = camp[m.Campana] || { nombre: m.Campana, compras: 0, prendas: 0, extra: 0 }; cc.compras++; cc.prendas += p; cc.extra += Math.max(0, num(m.Stamps) - p); }
+      if (num(m.Monto) > 0) { montoTot += num(m.Monto); montoN++; }
+    });
+    var conCompra = Object.keys(porClienta), vuelven = conCompra.filter(function (id) { return porClienta[id].compras >= 2; }).length;
+    var activasDesde = now - cfg(store, 'DiasClientaActiva') * DAY, activas = {};
+    store.Movimientos.forEach(function (m) { if (cuenta(m) && num(m.FechaHora) >= activasDesde && m.Tipo !== 'Bienvenida') activas[m.ClientaID] = 1; });
+    var canjes = store.Canjes.filter(function (j) { return num(j.FechaDesbloqueo) >= desde; });
+    var porBen = {};
+    canjes.forEach(function (j) {
+      var b = porBen[j.Beneficio] = porBen[j.Beneficio] || { nombre: j.Beneficio, desbloqueados: 0, canjeados: 0 };
+      if (j.Estado !== 'Anulado') b.desbloqueados++;
+      if (j.Estado === 'Canjeado') b.canjeados++;
+    });
+    var dist = [0, 0, 0, 0];
+    compras.forEach(function (m) { var p = num(m.Prendas); dist[Math.min(4, Math.max(1, p)) - 1]++; });
+    return {
+      dias: dias || 0,
+      clientas: store.Clientas.filter(function (c) { return !no(c.Activa); }).length,
+      nuevas: store.Clientas.filter(function (c) { return num(c.FechaAlta) >= desde; }).length,
+      activas: Object.keys(activas).length,
+      compras: compras.length, prendas: prendas,
+      prendasPorCompra: compras.length ? prendas / compras.length : 0,
+      comprasPorClienta: conCompra.length ? compras.length / conCompra.length : 0,
+      vuelven: conCompra.length ? vuelven / conCompra.length : 0,
+      clientasConCompra: conCompra.length,
+      distribucion: dist,
+      stampsCompra: stampsCompra, stampsBonus: stampsBonus, stampsFeria: feria,
+      canales: Object.keys(canal).map(function (k) { return canal[k]; }).sort(function (a, b) { return b.prendas - a.prendas; }),
+      campanas: Object.keys(camp).map(function (k) { return camp[k]; }).sort(function (a, b) { return b.prendas - a.prendas; }),
+      top: conCompra.map(function (id) { return { nombre: (nombres[id] || {}).nombre || id, numero: (nombres[id] || {}).numero || '', compras: porClienta[id].compras, prendas: porClienta[id].prendas }; })
+        .sort(function (a, b) { return b.prendas - a.prendas || b.compras - a.compras; }).slice(0, 8),
+      beneficios: {
+        desbloqueados: canjes.filter(function (j) { return j.Estado !== 'Anulado'; }).length,
+        canjeados: canjes.filter(function (j) { return j.Estado === 'Canjeado'; }).length,
+        disponibles: canjes.filter(function (j) { return j.Estado === 'Disponible' && !(num(j.Vence) && num(j.Vence) < now); }).length,
+        porBeneficio: Object.keys(porBen).map(function (k) { return porBen[k]; })
+      },
+      monto: { total: montoTot, compras: montoN, ticket: montoN ? montoTot / montoN : 0 }
+    };
+  }
+
+  /* ---------- acciones ---------- */
+  var WRITE = { alta: 1, crear: 1, compra: 1, bonus: 1, canjear: 1, anular: 1, campanaGuardar: 1, editarClienta: 1 };
+
+  function handle(store, action, p, now) {
+    var a, c, r;
+    switch (action) {
+
+      case 'publico':
+        return {
+          size: cfg(store, 'TamanoTarjeta'), extra2: cfg(store, 'ExtraDesde2Prendas'), bienvenida: cfg(store, 'StampsBienvenida'),
+          canales: CANALES, motivos: MOTIVOS_BONUS,
+          beneficios: beneficiosActivos(store).map(function (b) { return { stamps: num(b.Stamps), nombre: str(b.Nombre), descripcion: str(b.Descripcion) }; }),
+          campanas: campanasActivas(store, now).map(publicCamp),
+          campanasRaw: campanasActivas(store, now).map(function (x) { return { Nombre: x.Nombre, Multiplicador: x.Multiplicador, BonusCompra: x.BonusCompra, BonusAsistencia: x.BonusAsistencia, Canales: x.Canales, Activa: 'SI' }; })
+        };
+
+      case 'tarjeta':
+        c = null; store.Clientas.forEach(function (x) { if (x.Token === str(p.token) && !no(x.Activa)) c = x; });
+        if (!c) throw err('NOCARD', 'No encontramos esta Club Card. Pedile el link al equipo de Ainhoa.');
+        return tarjetaPublica(store, c, now);
+
+      case 'alta':
+        r = crearClienta(store, p, now, 'Autoregistro', '');
+        if (r.existe) return { existe: true, nombre: str(r.existe.Nombre) };
+        return { token: r.clienta.Token, tarjeta: tarjetaPublica(store, r.clienta, now) };
+
+      case 'login':
+        return auth(store, p.pin);
+
+      case 'buscar':
+        auth(store, p.pin);
+        var q = str(p.q), qn = norm(q), out = [];
+        var tok = (q.match(/[?&]c=([a-z0-9]+)/i) || [])[1] || (/^[a-z0-9]{10}$/.test(q) ? q : '');
+        var digits = q.replace(/\D/g, '');
+        store.Clientas.forEach(function (x) {
+          if (no(x.Activa)) return;
+          var full = norm(x.Nombre + ' ' + x.Apellido + ' ' + x.Instagram), idn = str(x.ID).replace(/\D/g, '');
+          var hit = (tok && x.Token === tok) ||
+            (digits.length >= 3 && digits.length === q.replace(/[\s\-n°#]/gi, '').length && (phone(x.Telefono).slice(-digits.length) === digits || parseInt(idn, 10) === parseInt(digits, 10))) ||
+            (qn.length >= 2 && !/^\d+$/.test(qn) && full.indexOf(qn.replace(/^@/, '')) >= 0);
+          if (hit) {
+            var e = estado(store, x, now);
+            out.push({ id: x.ID, numero: e.numero, nombre: e.nombre, apellido: e.apellido, tel: maskPhone(x.Telefono), instagram: str(x.Instagram), pos: e.pos, size: e.size, disponibles: e.disponibles.length });
+          }
+        });
+        return out.slice(0, 20);
+
+      case 'clienta':
+        auth(store, p.pin);
+        return tarjetaAdmin(store, getClienta(store, str(p.id)), now);
+
+      case 'crear':
+        a = auth(store, p.pin);
+        r = crearClienta(store, p, now, 'Equipo', a.nombre);
+        if (r.existe) return { existe: true, id: r.existe.ID, tarjeta: tarjetaAdmin(store, r.existe, now) };
+        return { id: r.clienta.ID, tarjeta: tarjetaAdmin(store, r.clienta, now) };
+
+      case 'editarClienta':
+        a = auth(store, p.pin);
+        c = getClienta(store, str(p.id));
+        var ch = {};
+        if (p.nombre !== undefined && str(p.nombre).length >= 2) ch.Nombre = cap(str(p.nombre));
+        if (p.apellido !== undefined) ch.Apellido = cap(str(p.apellido));
+        if (p.telefono !== undefined) { var t2 = phone(p.telefono); if (t2.length < 8) throw err('DATOS', 'El WhatsApp no parece completo.'); ch.Telefono = t2; }
+        if (p.cumple !== undefined) ch.Cumple = str(p.cumple).replace(/[^0-9\/]/g, '');
+        if (p.instagram !== undefined) ch.Instagram = str(p.instagram).replace(/^@/, '');
+        if (p.notas !== undefined) ch.Notas = str(p.notas);
+        update(store, 'Clientas', c, ch);
+        return tarjetaAdmin(store, c, now);
+
+      case 'compra':
+        a = auth(store, p.pin);
+        c = getClienta(store, str(p.id));
+        var prendas = Math.floor(num(p.prendas));
+        if (prendas < 1 || prendas > 40) throw err('DATOS', 'Cantidad de prendas inválida.');
+        var canal = CANALES.indexOf(str(p.canal)) >= 0 ? str(p.canal) : 'Showroom';
+        if (!yes(p.force)) {
+          var win = cfg(store, 'MinutosAntiduplicado') * 60000, prev = null;
+          movsDe(store, c.ID).forEach(function (m) { if (m.Tipo === 'Compra' && cuenta(m) && now - num(m.FechaHora) < win) prev = m; });
+          if (prev) {
+            var mins = Math.max(1, Math.round((now - num(prev.FechaHora)) / 60000));
+            throw err('DUP', 'A ' + str(c.Nombre) + ' ya se le cargó una compra hace ' + mins + ' min (' + num(prev.Prendas) + ' prendas). ¿Es otra compra?');
+          }
+        }
+        var pv = previewCompra(store, prendas, canal, now);
+        var detalle = pv.lines.slice(1).map(function (l) { return '+' + l.n + ' ' + l.t; }).join(' · ');
+        r = registrar(store, c, { Tipo: 'Compra', Canal: canal, Prendas: prendas, Stamps: pv.total, Detalle: detalle, Monto: num(p.monto) || '', Campana: pv.campana, Notas: str(p.notas) }, now, a.nombre);
+        return { sumados: pv.total, preview: pv, desbloqueados: r.desbloqueados, tarjeta: tarjetaAdmin(store, c, now), completo: Math.floor(r.despues / Math.max(1, cfg(store, 'TamanoTarjeta'))) > Math.floor(r.antes / Math.max(1, cfg(store, 'TamanoTarjeta'))) };
+
+      case 'bonus':
+        a = auth(store, p.pin);
+        c = getClienta(store, str(p.id));
+        var motivo = MOTIVOS_BONUS.indexOf(str(p.motivo)) >= 0 ? str(p.motivo) : 'Otro';
+        var cant = Math.floor(num(p.cantidad, 1));
+        if (cant < 1 || cant > 10) throw err('DATOS', 'El bonus va de 1 a 10 stamps.');
+        if (!yes(p.force)) {
+          var hoy = dayKey(now), rep = null;
+          movsDe(store, c.ID).forEach(function (m) { if (m.Tipo === 'Bonus' && cuenta(m) && m.Motivo === motivo && dayKey(num(m.FechaHora)) === hoy) rep = m; });
+          if (rep) throw err('DUP', str(c.Nombre) + ' ya recibió Bonus ' + motivo + ' hoy (' + fmtHora(num(rep.FechaHora)) + '). ¿Sumar otro igual?');
+        }
+        r = registrar(store, c, { Tipo: 'Bonus', Motivo: motivo, Stamps: cant, Notas: str(p.notas), Campana: str(p.campana) }, now, a.nombre);
+        return { sumados: cant, desbloqueados: r.desbloqueados, tarjeta: tarjetaAdmin(store, c, now), completo: Math.floor(r.despues / Math.max(1, cfg(store, 'TamanoTarjeta'))) > Math.floor(r.antes / Math.max(1, cfg(store, 'TamanoTarjeta'))) };
+
+      case 'canjear':
+        a = auth(store, p.pin);
+        var j = null; store.Canjes.forEach(function (x) { if (x.ID === str(p.canjeId)) j = x; });
+        if (!j) throw err('NOBEN', 'No encontré ese beneficio.');
+        if (j.Estado !== 'Disponible') throw err('BEN', 'Este beneficio ya está ' + str(j.Estado).toLowerCase() + '.');
+        if (num(j.Vence) && num(j.Vence) < now && !(yes(p.force) && a.rol === 'Dueña')) throw err('VENCIDO', 'Este beneficio venció el ' + fmtFechaLarga(num(j.Vence)) + '.');
+        update(store, 'Canjes', j, { Estado: 'Canjeado', FechaCanje: now, CanjeadoPor: a.nombre, Notas: str(p.notas) });
+        return { tarjeta: tarjetaAdmin(store, getClienta(store, j.ClientaID), now), beneficio: str(j.Beneficio) };
+
+      case 'anular':
+        a = auth(store, p.pin, 'duena');
+        var m0 = null; store.Movimientos.forEach(function (x) { if (x.ID === str(p.movId)) m0 = x; });
+        if (!m0) throw err('NOMOV', 'No encontré ese movimiento.');
+        if (yes(m0.Anulado) || m0.Tipo === 'Anulación') throw err('MOV', 'Ese movimiento ya está anulado.');
+        if (str(p.motivo).length < 3) throw err('DATOS', 'Escribí por qué se anula.');
+        c = getClienta(store, m0.ClientaID);
+        update(store, 'Movimientos', m0, { Anulado: 'SI' });
+        registrar(store, c, { Tipo: 'Anulación', Motivo: str(p.motivo), Stamps: -num(m0.Stamps), RefID: m0.ID, Detalle: 'Anula ' + m0.ID + ' (' + textoMov(m0) + ')' }, now, a.nombre);
+        var size = Math.max(1, cfg(store, 'TamanoTarjeta')), tot = totalDe(store, c.ID);
+        store.Canjes.forEach(function (x) {
+          if (x.ClientaID === c.ID && x.Estado === 'Disponible' && (num(x.Tarjeta) - 1) * size + num(x.Stamps) > tot)
+            update(store, 'Canjes', x, { Estado: 'Anulado', Notas: 'Se anuló el movimiento que lo desbloqueó (' + m0.ID + ')' });
+        });
+        return { tarjeta: tarjetaAdmin(store, c, now) };
+
+      case 'campanas':
+        auth(store, p.pin);
+        return store.Campanas.slice().sort(function (x, y) { return num(y.Desde) - num(x.Desde); }).map(function (x) {
+          var st = !yes(x.Activa) ? 'Pausada' : (num(x.Desde) > now ? 'Programada' : (num(x.Hasta) && num(x.Hasta) < now ? 'Terminada' : 'Activa'));
+          return { id: x.ID, nombre: str(x.Nombre), desde: num(x.Desde), hasta: num(x.Hasta), mult: Math.max(1, num(x.Multiplicador, 1)), bonusCompra: num(x.BonusCompra),
+            bonusAsistencia: num(x.BonusAsistencia), canales: str(x.Canales) || 'Todos', mensaje: str(x.Mensaje), activa: yes(x.Activa), estado: st,
+            desdeTxt: fmtFechaLarga(num(x.Desde)) + ' ' + fmtHora(num(x.Desde)), hastaTxt: fmtFechaLarga(num(x.Hasta)) + ' ' + fmtHora(num(x.Hasta)) };
+        });
+
+      case 'campanaGuardar':
+        a = auth(store, p.pin, 'duena');
+        var desdeMs = num(p.desde), hastaMs = num(p.hasta);
+        if (str(p.nombre).length < 2) throw err('DATOS', 'Ponele nombre a la campaña.');
+        if (!desdeMs || !hastaMs || hastaMs <= desdeMs) throw err('DATOS', 'Revisá las fechas: el final tiene que ser después del inicio.');
+        var datos = { Nombre: str(p.nombre), Desde: desdeMs, Hasta: hastaMs, Multiplicador: Math.min(3, Math.max(1, Math.floor(num(p.mult, 1)))),
+          BonusCompra: Math.min(5, Math.max(0, Math.floor(num(p.bonusCompra)))), BonusAsistencia: Math.min(5, Math.max(0, Math.floor(num(p.bonusAsistencia)))),
+          Canales: str(p.canales) || 'Todos', Mensaje: str(p.mensaje), Activa: yes(p.activa) ? 'SI' : 'NO' };
+        if (p.id) {
+          var k = null; store.Campanas.forEach(function (x) { if (x.ID === str(p.id)) k = x; });
+          if (!k) throw err('NOCAMP', 'No encontré esa campaña.');
+          update(store, 'Campanas', k, datos);
+        } else {
+          datos.ID = nextId(store, 'Campanas', 'K-', 3); datos.CreadaPor = a.nombre;
+          append(store, 'Campanas', datos);
+        }
+        return handle(store, 'campanas', p, now);
+
+      case 'stats':
+        auth(store, p.pin, 'duena');
+        return stats(store, now, Math.floor(num(p.dias)));
+
+      default:
+        throw err('ACCION', 'Acción desconocida: ' + action);
+    }
+  }
+
+  return {
+    SCHEMA: SCHEMA, SHEET_NAMES: SHEET_NAMES, DATE_COLS: DATE_COLS, TEXT_COLS: TEXT_COLS, CANALES: CANALES, MOTIVOS_BONUS: MOTIVOS_BONUS,
+    DEFAULT_CONFIG: DEFAULT_CONFIG, DEFAULT_BENEFICIOS: DEFAULT_BENEFICIOS, DEFAULT_EQUIPO: DEFAULT_EQUIPO, WRITE: WRITE,
+    handle: handle, previewCompra: previewCompra, phone: phone, num: num, fmtFechaLarga: fmtFechaLarga, fmtHora: fmtHora, dayKey: dayKey
+  };
+})();
+if (typeof module !== 'undefined') module.exports = CORE;
+
+</script>
+<script>
+/* ============================================================
+   CONFIGURACIÓN
+   Pegá acá la URL de la implementación del Apps Script.
+   Si queda vacía, la app funciona en MODO DEMO (datos de ejemplo).
+   ============================================================ */
+var API_URL = '';
+var DEMO = !API_URL;
+
+/* ---------- utilidades ---------- */
+var $ = function (s, r) { return (r || document).querySelector(s); };
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function plural(n, a, b) { return n === 1 ? a : b; }
+function money(n) { return '$' + Math.round(n).toLocaleString('es-AR'); }
+function pct(n) { return Math.round(n * 100) + '%'; }
+function dec(n) { return (Math.round(n * 10) / 10).toLocaleString('es-AR'); }
+function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+function lsSet(k, v) { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} }
+function opId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
+var toastT;
+function toast(t) { var el = $('#toast'); if (el) el.remove(); el = document.createElement('div'); el.id = 'toast'; el.className = 'toast'; el.textContent = t; document.body.appendChild(el); clearTimeout(toastT); toastT = setTimeout(function () { el.remove(); }, 2800); }
+function baseUrl() { return location.origin + location.pathname; }
+function cardUrl(token) { return baseUrl() + '?c=' + token; }
+function waLink(tel, text) {
+  var n = String(tel || '').replace(/\D/g, ''); if (n && n.indexOf('54') !== 0) n = '549' + n;
+  var mobile = /iphone|ipad|android/i.test(navigator.userAgent);
+  return (mobile ? 'https://wa.me/' + n + '?text=' : 'https://web.whatsapp.com/send?phone=' + n + '&text=') + encodeURIComponent(text);
+}
+
+/* ---------- conexión con el backend ---------- */
+function api(action, params) {
+  params = params || {};
+  if (DEMO) return demoApi(action, params);
+  var body = { action: action };
+  for (var k in params) body[k] = params[k];
+  return fetch(API_URL, { method: 'POST', body: JSON.stringify(body) })
+    .then(function (r) { return r.json(); })
+    .catch(function () { var e = new Error('Sin conexión. Revisá la señal y probá de nuevo.'); e.code = 'NET'; throw e; })
+    .then(function (j) { if (!j.ok) { var e = new Error(j.error || 'Error'); e.code = j.code; throw e; } return j.data; });
+}
+
+/* ---------- MODO DEMO: misma lógica, datos de ejemplo en memoria ---------- */
+var demoStore = null;
+function demoApi(action, p) {
+  if (!demoStore) demoStore = seedDemo();
+  return new Promise(function (ok, ko) {
+    setTimeout(function () {
+      try { demoStore._ops = []; ok(JSON.parse(JSON.stringify(CORE.handle(demoStore, action, p, Date.now())))); }
+      catch (e) { var x = new Error(e.msg || e.message); x.code = e.code; ko(x); }
+    }, 220);
+  });
+}
+function seedDemo() {
+  var s = {}; Object.keys(CORE.SCHEMA).forEach(function (t) { s[t] = []; });
+  CORE.DEFAULT_CONFIG.forEach(function (r) { s.Config.push({ Clave: r[0], Valor: r[1] }); });
+  CORE.DEFAULT_BENEFICIOS.forEach(function (r) { s.Beneficios.push({ Stamps: r[0], Nombre: r[1], Descripcion: r[2], DiasVigencia: r[3], Activo: r[4] }); });
+  s.Equipo.push({ Nombre: 'Angie', PIN: '1234', Rol: 'Dueña', Activo: 'SI' }, { Nombre: 'Laurita', PIN: '5678', Rol: 'Equipo', Activo: 'SI' });
+  var D = 86400000, now = Date.now(), H = function (a, p, t) { return CORE.handle(s, a, p, t); };
+  var pin = { pin: '1234' };
+  var ej = [
+    ['Sofía', 'Valy', '3815550101', '14/03', 'sofivaly', [[-34, 2, 'Showroom'], [-20, 1, 'Tanda online'], [-6, 3, 'Feria']], [[-20, 'El Círculo']]],
+    ['Eugenia', 'Svoboda', '3815550202', '02/11', 'eugesvoboda', [[-40, 4, 'Showroom'], [-12, 2, 'Privé'], [-2, 5, 'Feria']], [[-12, 'Trajo amiga']]],
+    ['Paula', 'Ayuso', '3815550303', '', 'pauayuso', [[-9, 1, 'Showroom']], []],
+    ['Jimena', 'Infante', '3815550404', '21/07', '', [[-60, 5, 'Showroom'], [-41, 4, 'Tanda online'], [-25, 6, 'Feria'], [-8, 3, 'Showroom']], [[-25, 'Feria']]],
+    ['Lourdes', 'Paz', '3815550505', '', 'lulipaz', [], []]
+  ];
+  ej.forEach(function (c, i) {
+    var t0 = now - 70 * D + i * 3600000;
+    var r = H('crear', { pin: '1234', nombre: c[0], apellido: c[1], telefono: c[2], cumple: c[3], instagram: c[4] }, t0);
+    c[5].forEach(function (k) { H('compra', { pin: '1234', id: r.id, prendas: k[1], canal: k[2], monto: k[1] * 61000, force: 'SI' }, now + k[0] * D); });
+    c[6].forEach(function (k) { H('bonus', { pin: '1234', id: r.id, motivo: k[1], cantidad: 1, force: 'SI' }, now + k[0] * D + 60000); });
+  });
+  s.Movimientos.sort(function (a, b) { return a.FechaHora - b.FechaHora; });
+  var j = s.Canjes.filter(function (x) { return x.ClientaID === 'C-0004'; })[0];
+  if (j) { j.Estado = 'Canjeado'; j.FechaCanje = now - 20 * D; j.CanjeadoPor = 'Angie'; }
+  var hoy = new Date(); hoy.setHours(23, 59, 0, 0);
+  s.Campanas.push({ ID: 'K-001', Nombre: 'Feria de Primavera', Desde: now - 3 * 3600000, Hasta: hoy.getTime(), Multiplicador: 2, BonusCompra: 0, BonusAsistencia: 1, Canales: 'Feria', Mensaje: 'Hoy en la feria tu compra suma doble.', Activa: 'SI', CreadaPor: 'Angie' });
+  s.Campanas.push({ ID: 'K-002', Nombre: 'Aniversario Ainhoa', Desde: now + 20 * D, Hasta: now + 21 * D, Multiplicador: 2, BonusCompra: 0, BonusAsistencia: 0, Canales: 'Todos', Mensaje: 'Un año de Ainhoa: todo suma doble.', Activa: 'SI', CreadaPor: 'Angie' });
+  s._ops = [];
+  return s;
+}
+
+/* ---------- sellos (SVG) ---------- */
+var KINDS = {
+  compra:  { fill: '#252A1C', glyph: 'a', label: 'Compra' },
+  feria:   { fill: '#69543D', glyph: 'f', label: 'Feria' },
+  prive:   { fill: '#4F2817', glyph: 'p', label: 'Privé' },
+  circulo: { fill: '#FFFFFF', ring: '#BC7779', glyph: 'c', label: 'El Círculo' },
+  bonus:   { fill: '#BC7779', glyph: '✦', label: 'Bonus' }
+};
+function stampSVG(kind) {
+  var k = KINDS[kind] || KINDS.compra, light = k.fill === '#FFFFFF';
+  var fg = light ? k.ring : '#F6F1E9';
+  var glyph = k.glyph === '✦'
+    ? '<path d="M24 14.5l2.1 7.4 7.4 2.1-7.4 2.1-2.1 7.4-2.1-7.4-7.4-2.1 7.4-2.1z" fill="' + fg + '"/>'
+    : '<text x="24" y="30.5" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="21" fill="' + fg + '">' + k.glyph + '</text>';
+  return '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="' + k.fill + '"' + (light ? ' stroke="' + k.ring + '" stroke-width="2"' : '') + '/>' +
+    '<circle cx="24" cy="24" r="18.2" fill="none" stroke="' + fg + '" stroke-opacity=".55" stroke-width=".8" stroke-dasharray="1.4 2.1"/>' + glyph + '</svg>';
+}
+function kindOfMotivo(v, dflt) { var s = String(v || '').toLowerCase(); if (s.indexOf('feria') === 0) return 'feria'; if (s.indexOf('priv') === 0) return 'prive'; if (s.indexOf('círculo') >= 0 || s.indexOf('circulo') >= 0) return 'circulo'; return dflt || 'bonus'; }
+function rotFor(i) { return ((i * 37) % 17) - 8; }
+
+/* ---------- QR ---------- */
+function qrSVG(text) {
+  if (typeof qrcode === 'undefined') return '<div class="empty">No se pudo cargar el generador de QR.</div>';
+  var q = qrcode(0, 'M'); q.addData(text); q.make();
+  var n = q.getModuleCount(), d = '';
+  for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (q.isDark(r, c)) d += 'M' + c + ' ' + r + 'h1v1h-1z';
+  return '<svg viewBox="0 0 ' + n + ' ' + n + '" shape-rendering="crispEdges"><path d="' + d + '" fill="#252A1C"/></svg>';
+}
+
+/* ============================================================
+   ESTADO Y NAVEGACIÓN
+   ============================================================ */
+var S = {
+  view: 'home', token: null, card: null, pub: null,
+  admin: null, tab: 'caja', cli: null, panel: null, results: null,
+  compra: { prendas: 1, canal: lsGet('cc_canal') || 'Showroom', monto: '', notas: '' },
+  bonus: { motivo: 'Feria', cantidad: 1, notas: '' },
+  stats: null, dias: 30, camps: null, campEdit: null, busy: false
+};
+var root = $('#app');
+
+function header(sub, left, right) {
+  return '<header class="top">' + (left || '') + '<div class="brand">ainhoa</div><div class="brand-sub">' + esc(sub) + '</div>' + (right || '') + '</header>' +
+    (DEMO ? '<div class="demo-bar">Modo demo · datos de ejemplo, nada se guarda</div>' : '');
+}
+function go(view, opts) {
+  S.view = view;
+  if (!DEMO) {
+    try {
+      var url = baseUrl();
+      if (view === 'card' && S.token) url += '?c=' + S.token;
+      else if (view === 'alta') url += '?alta';
+      else if (view === 'admin') url += '?equipo';
+      history.replaceState(null, '', url);
+    } catch (e) {}
+    setManifest();
+  }
+  render();
+  window.scrollTo(0, 0);
+}
+function render() {
+  if (S.view === 'card') return renderCard();
+  if (S.view === 'alta') return renderAlta();
+  if (S.view === 'admin') return renderAdmin();
+  return renderHome();
+}
+
+/* ---------- HOME ---------- */
+function renderHome() {
+  root.innerHTML = header('Club Card') +
+    '<main class="wrap">' +
+    '<div class="home-hero"><div class="eyebrow">Ainhoa Vintage</div><h1>Cuanto más formás parte de Ainhoa, más cosas desbloqueás.</h1>' +
+    '<p class="lead">Cada prenda que te llevás suma un stamp. Completá tu tarjeta y desbloqueá beneficios.</p></div>' +
+    '<div class="home-card">' + mcardHTML({ nombre: 'Tu nombre', numero: 'N° 0000', desde: '', completas: 0, tarjetasParaVip: 3 }) + '</div>' +
+    '<div class="stack">' +
+    '<button class="btn big" data-act="toAlta">Crear mi Club Card</button>' +
+    (DEMO ? '<button class="btn ghost" data-act="demoCard">Ver una tarjeta de ejemplo</button>' : '') +
+    '</div>' +
+    '<p class="small" style="margin-top:18px">¿Ya tenés tu tarjeta? Abrí el link que te mandamos por WhatsApp, o pedíselo al equipo en caja.</p>' +
+    '<div style="text-align:center;margin-top:40px"><button class="link" data-act="toAdmin">Equipo Ainhoa</button>' + (DEMO ? '<div class="small">PIN de prueba: 1234</div>' : '') + '</div>' +
+    '</main>';
+}
+
+/* ---------- ALTA CLIENTA ---------- */
+function renderAlta(errMsg) {
+  root.innerHTML = header('Club Card', '<button class="top-btn l" data-act="toHome" aria-label="Volver">Volver</button>') +
+    '<main class="wrap"><div class="eyebrow">Nueva Club Card</div><h1>Sumate al Club</h1>' +
+    '<p class="lead">Tarda un minuto. Arrancás con ' + (S.pub ? S.pub.bienvenida : 1) + ' stamp de regalo.</p>' +
+    '<form class="form" id="fAlta" style="margin-top:22px" novalidate>' +
+    '<div class="field"><label for="aNombre">Nombre</label><input id="aNombre" type="text" autocomplete="given-name" required></div>' +
+    '<div class="field"><label for="aApellido">Apellido <span class="opt">(opcional)</span></label><input id="aApellido" type="text" autocomplete="family-name"></div>' +
+    '<div class="field"><label for="aTel">WhatsApp</label><input id="aTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="381 555 1234" required></div>' +
+    '<div class="row"><div class="field"><label for="aCumple">Cumple <span class="opt">(día/mes)</span></label><input id="aCumple" type="text" inputmode="numeric" placeholder="14/03" maxlength="5"></div>' +
+    '<div class="field"><label for="aIg">Instagram <span class="opt">(opcional)</span></label><input id="aIg" type="text" autocapitalize="off" placeholder="@usuario"></div></div>' +
+    '<div class="msg bad" id="aErr">' + esc(errMsg || '') + '</div>' +
+    '<button class="btn big" type="submit" id="aBtn">Crear mi Club Card</button>' +
+    '<p class="small">Tu WhatsApp lo usamos solo para identificar tu tarjeta y avisarte de tus beneficios.</p>' +
+    '</form></main>';
+  var cu = $('#aCumple');
+  cu.addEventListener('input', function () { var v = cu.value.replace(/\D/g, '').slice(0, 4); cu.value = v.length > 2 ? v.slice(0, 2) + '/' + v.slice(2) : v; });
+  $('#fAlta').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var b = $('#aBtn'); b.disabled = true; b.textContent = 'Creando…'; $('#aErr').textContent = '';
+    api('alta', { nombre: $('#aNombre').value, apellido: $('#aApellido').value, telefono: $('#aTel').value, cumple: $('#aCumple').value, instagram: $('#aIg').value })
+      .then(function (r) {
+        if (r.existe) {
+          $('#aErr').textContent = 'Ese WhatsApp ya tiene una Club Card. Pedile tu link al equipo de Ainhoa y te lo mandamos.';
+          b.disabled = false; b.textContent = 'Crear mi Club Card'; return;
+        }
+        S.token = r.token; lsSet('cc_token', r.token); S.card = r.tarjeta; S.fresh = 'welcome';
+        go('card');
+      })
+      .catch(function (er) { $('#aErr').textContent = er.message; b.disabled = false; b.textContent = 'Crear mi Club Card'; });
+  });
+}
+
+/* ---------- TARJETA (vista clienta) ---------- */
+function mcardHTML(t) {
+  var dots = '';
+  for (var i = 0; i < (t.tarjetasParaVip || 3); i++) dots += '<i class="' + (i < (t.completas || 0) ? 'on' : '') + '"></i>';
+  return '<div class="mcard' + (t.vip ? ' vip' : '') + '" role="img" aria-label="Club Card de ' + esc(t.nombre) + '">' +
+    '<div class="mc-top"><div class="mc-brand">AINHOA</div><div class="mc-kind">Club Card' + (t.vip ? '<br>VIP' : '') + '</div></div>' +
+    '<div class="mc-bottom"><div class="mc-name">' + esc(t.nombre) + '</div>' +
+    '<div class="mc-meta"><div class="mc-done" title="Tarjetas completas">' + dots + '</div><b>' + esc(t.numero) + '</b>' + (t.desde ? '<br>Desde ' + esc(t.desde.slice(3)) : '') + '</div></div></div>';
+}
+function gridHTML(t, nuevos) {
+  var ms = {}; (t.ladder || []).forEach(function (l) { ms[l.stamps] = l.nombre; });
+  var out = '', start = t.slots.length - (nuevos || 0);
+  for (var i = 0; i < t.size; i++) {
+    var k = t.slots[i], isMs = ms[i + 1];
+    out += '<div class="slot' + (isMs ? ' ms' : '') + '"><div class="hole">' +
+      (k ? '<div class="stamp' + (i >= start ? ' new' : '') + '" style="--rot:' + rotFor(i) + 'deg;transform:rotate(' + rotFor(i) + 'deg);animation-delay:' + (i >= start ? (i - start) * 0.12 : 0) + 's">' + stampSVG(k) + '</div>' : '<span class="n">' + (i + 1) + '</span>') +
+      '</div><div class="lbl">' + (isMs ? esc(isMs) : '') + '</div></div>';
+  }
+  return '<div class="grid" role="img" aria-label="' + t.pos + ' de ' + t.size + ' stamps">' + out + '</div>';
+}
+function shortName(n) { return n.length > 12 ? n.split(' ')[0] : n; }
+function legendHTML(t) {
+  var used = {}; t.slots.forEach(function (k) { used[k] = 1; });
+  var ks = Object.keys(used); if (ks.length < 2) return '';
+  return '<div class="legend">' + ks.map(function (k) { return '<span>' + stampSVG(k) + KINDS[k].label + '</span>'; }).join('') + '</div>';
+}
+function nextText(t, quien) {
+  var ella = quien === 'ella';
+  if (t.pos === 0 && t.completas > 0) return ella ? 'Completó su tarjeta ' + t.completas + '. Arranca una nueva.' : 'Completaste tu tarjeta ' + t.completas + '. Arrancás una nueva.';
+  if (!t.proximo) return (ella ? 'Le faltan ' : 'Te faltan ') + t.faltanTarjeta + ' para completar la tarjeta.';
+  var f = t.proximo.faltan, n = '<b>' + esc(t.proximo.nombre) + '</b>';
+  if (f === 1) return ella ? 'Una más y desbloquea ' + n + '.' : 'Una más y desbloqueás ' + n + '.';
+  return (ella ? 'Le faltan ' : 'Te faltan ') + f + ' para ' + n + '.';
+}
+function campHTML(cs, admin) {
+  if (!cs || !cs.length) return '';
+  return cs.map(function (c) {
+    var what = c.mult > 1 ? 'Tu compra suma x' + c.mult : (c.bonusCompra ? 'Tu compra suma +' + c.bonusCompra : 'Bonus Stamp');
+    if (admin) what = (c.mult > 1 ? 'Compras x' + c.mult : '') + (c.bonusCompra ? ' +' + c.bonusCompra + ' por compra' : '') + (c.bonusAsistencia ? ' · asistencia +' + c.bonusAsistencia : '') + ' · ' + c.canales;
+    return '<div class="camp"><div class="spark">✦</div><div><b>' + (admin ? esc(c.nombre) : 'Hoy hay Bonus Stamp') + '</b><span>' + esc(admin ? what : (c.mensaje || what)) + (admin ? '' : ' · ' + esc(c.nombre)) + ' · hasta ' + esc(c.hasta.slice(-5)) + '</span></div></div>';
+  }).join('');
+}
+function benHTML(t) {
+  var disp = t.disponibles, h = '';
+  if (disp.length) {
+    h += '<div class="stack" style="margin-top:12px">' + disp.map(function (b) {
+      return '<div class="ben ready"><div class="bt"><h3>' + esc(b.nombre) + '</h3><span class="pill rose">Para usar</span></div><p>' + esc(b.descripcion) + '</p>' +
+        '<div class="small">' + (b.vence ? 'Vence el ' + esc(b.vence) + ' · ' : '') + 'Mostralo en caja</div></div>';
+    }).join('') + '</div>';
+  }
+  h += '<div class="ladder" style="margin-top:6px">' + t.ladder.map(function (l) {
+    return '<div class="rung' + (l.alcanzado ? ' done' : '') + '"><div class="at">' + l.stamps + '</div><div class="grow"><div class="t">' + esc(l.nombre) + '</div><div class="s">' + esc(l.descripcion) + '</div></div>' +
+      (l.alcanzado ? '<span class="pill ok">Desbloqueado</span>' : '<span class="pill">' + (l.stamps - t.pos) + ' más</span>') + '</div>';
+  }).join('') +
+    '<div class="rung"><div class="at">' + t.tarjetasParaVip + '×</div><div class="grow"><div class="t">VIP Ainhoa</div><div class="s">Completando ' + t.tarjetasParaVip + ' tarjetas: acceso anticipado y beneficios especiales.</div></div>' +
+    (t.vip ? '<span class="pill ink">Sos VIP</span>' : '<span class="pill">' + t.completas + ' de ' + t.tarjetasParaVip + '</span>') + '</div></div>';
+  var usados = t.ganados.filter(function (g) { return g.estado !== 'Disponible'; });
+  if (usados.length) h += '<details style="margin-top:8px"><summary class="small" style="cursor:pointer;padding:8px 0">Usados y vencidos (' + usados.length + ')</summary><div class="list">' +
+    usados.map(function (g) { return '<div class="li"><div class="grow"><div class="t">' + esc(g.nombre) + '</div><div class="s">' + (g.estado === 'Canjeado' ? 'Usado el ' + esc(g.canjeado) : esc(g.estado)) + '</div></div></div>'; }).join('') + '</div></details>';
+  return h;
+}
+function histHTML(list, admin) {
+  if (!list.length) return '<div class="empty">Todavía no hay movimientos.</div>';
+  return '<div class="list">' + list.map(function (m) {
+    var off = m.anulado || m.tipo === 'Anulación';
+    return '<div class="li' + (m.anulado ? ' off' : '') + '"><div class="d">' + esc(m.fecha) + '</div><div class="dot">' + stampSVG(m.kind) + '</div>' +
+      '<div class="grow"><div class="t">' + esc(m.texto) + '</div>' + (m.detalle ? '<div class="s">' + esc(m.detalle) + '</div>' : '') +
+      (admin ? '<div class="s">' + esc(m.hora) + ' · ' + esc(m.admin || '—') + (m.monto ? ' · ' + money(m.monto) : '') + (m.notas ? ' · ' + esc(m.notas) : '') + '</div>' : '') + '</div>' +
+      '<div style="text-align:right"><div class="plus' + (m.stamps < 0 ? ' neg' : '') + '">' + (m.stamps > 0 ? '+' : '') + m.stamps + '</div>' +
+      (admin && S.admin.rol === 'Dueña' && !off ? '<button class="link" style="font-size:11.5px" data-act="anular" data-id="' + esc(m.id) + '">Anular</button>' : '') +
+      (m.anulado ? '<div class="small">anulado</div>' : '') + '</div></div>';
+  }).join('') + '</div>';
+}
+function renderCard() {
+  var t = S.card;
+  if (!t) {
+    root.innerHTML = header('Club Card') + '<main class="wrap"><div class="spin"></div></main>';
+    api('tarjeta', { token: S.token }).then(function (r) { S.card = r; renderCard(); })
+      .catch(function (e) {
+        if (e.code === 'NOCARD') lsSet('cc_token', null);
+        root.innerHTML = header('Club Card') + '<main class="wrap"><div class="msg bad" style="margin-top:20px">' + esc(e.message) + '</div><div style="margin-top:16px"><button class="btn ghost" data-act="retryCard">Probar de nuevo</button></div><div style="margin-top:10px"><button class="btn ghost" data-act="toHome">Ir al inicio</button></div></main>';
+      });
+    return;
+  }
+  var nuevos = S.fresh === 'welcome' ? t.slots.length : 0;
+  root.innerHTML = header('Club Card', DEMO ? '<button class="top-btn l" data-act="toHome">Inicio</button>' : '', '<button class="top-btn r" data-act="qr">Mi QR</button>') +
+    '<main class="wrap">' +
+    (S.fresh === 'welcome' ? '<div class="msg ok" style="margin-bottom:16px">Bienvenida al Club, ' + esc(t.nombre) + '. Sumaste tu primer stamp. Mostrale tu QR al equipo para sumar la compra de hoy.</div>' : '') +
+    mcardHTML(t) + campHTML(t.campanas) +
+    '<div class="progress"><div><div class="count num">' + t.pos + '<small> / ' + t.size + '</small></div><div class="count-label">stamps</div></div><div class="next">' + nextText(t) + '</div></div>' +
+    gridHTML(t, nuevos) + legendHTML(t) +
+    '<section class="sec"><div class="sec-h"><h2>Beneficios</h2>' + (t.disponibles.length ? '<span class="pill rose">' + t.disponibles.length + ' para usar</span>' : '') + '</div>' + benHTML(t) + '</section>' +
+    '<section class="sec"><div class="sec-h"><h2>Historial</h2><span class="small num">' + t.compras + ' ' + plural(t.compras, 'compra', 'compras') + ' · ' + t.prendas + ' ' + plural(t.prendas, 'prenda', 'prendas') + '</span></div>' + histHTML(t.historial) + '</section>' +
+    '<section class="sec"><div class="small">Guardá esta página: en iPhone tocá Compartir → <b>Agregar a inicio</b>. Así tu Club Card queda como una app.</div>' +
+    '<div class="small" style="margin-top:10px">Los stamps los suma el equipo de Ainhoa al momento de tu compra.</div></section>' +
+    '</main>';
+  if (S.fresh === 'welcome') { S.fresh = null; setTimeout(function () { openQR(); }, 1600); }
+}
+function openQR() {
+  var t = S.card; if (!t) return;
+  sheet('<div class="sheet-h"><h2>Mi QR</h2><button class="x" data-act="closeSheet" aria-label="Cerrar">×</button></div>' +
+    '<div class="qrbox"><div class="qr">' + qrSVG(cardUrl(t.token)) + '</div><div class="eyebrow">' + esc(t.numero) + ' · ' + esc(t.nombre) + '</div>' +
+    '<p class="small" style="text-align:center;margin:0">Mostralo en caja para sumar tus stamps.</p></div>');
+}
+function sheet(html) {
+  closeSheet();
+  var bg = document.createElement('div'); bg.className = 'sheet-bg'; bg.id = 'sheet';
+  bg.innerHTML = '<div class="sheet" role="dialog" aria-modal="true">' + html + '</div>';
+  bg.addEventListener('click', function (e) { if (e.target === bg) closeSheet(); });
+  document.body.appendChild(bg);
+}
+function closeSheet() { var s = $('#sheet'); if (s) s.remove(); stopScan(); }
+
+/* ============================================================
+   ADMIN
+   ============================================================ */
+var ICON = {
+  caja: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></svg>',
+  nueva: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="M7 14.5h5M15.5 9.5v4M13.5 11.5h4"/></svg>',
+  camp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3.5l2.2 6.3 6.3 2.2-6.3 2.2L12 20.5l-2.2-6.3L3.5 12l6.3-2.2z"/></svg>',
+  num: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 19.5V11M10 19.5V5M15 19.5v-6M20 19.5V8.5"/></svg>'
+};
+function renderAdmin() {
+  if (!S.admin) return renderLogin();
+  var tabs = [['caja', 'Caja'], ['nueva', 'Nueva']];
+  if (S.admin.rol === 'Dueña') tabs.push(['camp', 'Campañas'], ['num', 'Números']);
+  var body = S.tab === 'nueva' ? nuevaHTML() : S.tab === 'camp' ? campsHTML() : S.tab === 'num' ? numsHTML() : cajaHTML();
+  root.innerHTML = header('Club Card · Equipo', '', '<button class="top-btn r" data-act="logout">' + esc(S.admin.nombre) + ' · Salir</button>') +
+    '<main class="wrap">' + body + '</main>' +
+    '<nav class="tabs"><div class="tabs-in">' + tabs.map(function (t) { return '<button class="tab' + (S.tab === t[0] ? ' on' : '') + '" data-act="tab" data-tab="' + t[0] + '">' + ICON[t[0]] + t[1] + '</button>'; }).join('') + '</div></nav>';
+  afterAdmin();
+}
+function renderLogin(msg) {
+  root.innerHTML = header('Club Card · Equipo', '<button class="top-btn l" data-act="toHome">Volver</button>') +
+    '<main class="wrap"><form id="fLogin" class="form" style="margin-top:40px;max-width:340px;margin-inline:auto" novalidate>' +
+    '<h2 style="text-align:center">Acceso equipo</h2>' +
+    '<div class="field"><label for="lPin">Tu PIN</label><input id="lPin" class="kbd" type="password" inputmode="numeric" autocomplete="off" maxlength="8"></div>' +
+    '<div class="msg bad" id="lErr">' + esc(msg || '') + '</div>' +
+    '<button class="btn big" type="submit" id="lBtn">Entrar</button>' + (DEMO ? '<p class="small" style="text-align:center">Demo: 1234 (dueña) · 5678 (equipo)</p>' : '') + '</form></main>';
+  $('#lPin').focus();
+  $('#fLogin').addEventListener('submit', function (e) {
+    e.preventDefault(); var pin = $('#lPin').value, b = $('#lBtn'); b.disabled = true; b.textContent = 'Entrando…';
+    api('login', { pin: pin }).then(function (r) { S.admin = { nombre: r.nombre, rol: r.rol, pin: pin }; try { sessionStorage.setItem('cc_admin', JSON.stringify(S.admin)); } catch (x) {} S.tab = 'caja'; loadPub(); renderAdmin(); })
+      .catch(function (er) { renderLogin(er.message); });
+  });
+}
+function A(action, p) { p = p || {}; p.pin = S.admin.pin; return api(action, p); }
+function loadPub() { return api('publico').then(function (r) { var had = S.pub && JSON.stringify(S.pub.campanas); S.pub = r; S.pubAt = Date.now(); if (had !== JSON.stringify(r.campanas) && S.view === 'admin' && S.tab === 'caja' && !S.panel && !S.q && !$('#sheet')) renderAdmin(); }).catch(function () {}); }
+
+/* ---------- CAJA ---------- */
+function cajaHTML() {
+  var h = '';
+  if (S.pub && S.pub.campanas.length) h += campHTML(S.pub.campanas, true);
+  if (!S.cli) {
+    h += '<div style="margin-top:' + (S.pub && S.pub.campanas.length ? 18 : 6) + 'px"><div class="eyebrow" style="margin-bottom:8px">Buscar clienta</div>' +
+      '<form class="search" id="fBuscar" novalidate><input id="q" type="search" inputmode="search" autocomplete="off" placeholder="Últimos 4 del cel, nombre o N°" value="' + esc(S.q || '') + '">' +
+      '<button class="btn ghost" type="button" data-act="scan" aria-label="Escanear QR">QR</button></form></div>' +
+      '<div id="results" style="margin-top:6px">' + resultsHTML() + '</div>' +
+      '<div class="row" style="margin-top:22px"><button class="btn ghost" data-act="tab" data-tab="nueva">Nueva clienta</button><button class="btn ghost" data-act="altaQR">QR de alta</button></div>';
+    return h;
+  }
+  var t = S.cli;
+  h += '<div class="who" style="margin-top:6px"><div class="grow"><div class="eyebrow">' + esc(t.numero) + (t.vip ? ' · VIP' : '') + '</div><h2>' + esc(t.nombre + ' ' + t.apellido) + '</h2>' +
+    '<div class="mini">' + miniDots(t) + '</div><div class="small" style="margin-top:6px"><b class="num" style="color:var(--ink)">' + t.pos + '/' + t.size + '</b> · ' + nextText(t, 'ella') + '</div></div>' +
+    '<button class="x" data-act="clearCli" aria-label="Cerrar clienta">×</button></div>';
+  if (t.disponibles.length && S.panel) h += '<div class="msg warn" style="margin-top:10px">Tiene ' + t.disponibles.length + ' beneficio' + (t.disponibles.length > 1 ? 's' : '') + ' para usar: ' + esc(t.disponibles.map(function (b) { return b.nombre; }).join(', ')) + '.</div>';
+  else if (t.disponibles.length) h += '<div class="stack" style="margin-top:12px">' + t.disponibles.map(function (b) {
+    return '<div class="ben ready"><div class="bt"><h3>' + esc(b.nombre) + '</h3><button class="btn rose sm" data-act="canjear" data-id="' + esc(b.id) + '">Canjear</button></div><div class="small">' + esc(b.descripcion) + (b.vence ? ' · vence ' + esc(b.vence) : '') + '</div></div>';
+  }).join('') + '</div>';
+  if (S.panel === 'compra') h += compraHTML();
+  else if (S.panel === 'bonus') h += bonusHTML();
+  else if (S.panel === 'hist') h += '<section class="sec"><div class="sec-h"><h3>Historial</h3><button class="link" data-act="panel" data-p="">Cerrar</button></div>' + histHTML(t.historial, true) + '</section>';
+  else if (S.panel === 'datos') h += datosHTML();
+  else h += '<div class="stack" style="margin-top:16px"><button class="btn big" data-act="panel" data-p="compra">Nueva compra</button>' +
+    '<div class="row"><button class="btn ghost" data-act="panel" data-p="bonus">+ Bonus</button><button class="btn ghost" data-act="panel" data-p="hist">Historial</button></div>' +
+    '<button class="btn ghost" data-act="panel" data-p="datos">Datos y link de la tarjeta</button></div>';
+  return h;
+}
+function miniDots(t) {
+  var ms = {}; t.ladder.forEach(function (l) { ms[l.stamps] = 1; });
+  var o = ''; for (var i = 0; i < t.size; i++) { var k = t.slots[i]; o += '<i class="' + (k ? (k === 'bonus' ? 'b' : 'on') : '') + (ms[i + 1] ? ' ms' : '') + '"></i>'; }
+  return o;
+}
+function resultsHTML() {
+  if (S.results === 'loading') return '<div class="spin"></div>';
+  if (!S.results) return '';
+  if (!S.results.length) return '<div class="empty">No encontré a nadie con eso.<br><button class="link" data-act="tab" data-tab="nueva">Crear clienta nueva</button></div>';
+  return '<div class="list">' + S.results.map(function (r) {
+    return '<div class="li tap" data-act="pick" data-id="' + esc(r.id) + '"><div class="grow"><div class="t">' + esc(r.nombre + ' ' + r.apellido) + '</div><div class="s">' + esc(r.numero) + ' · ' + esc(r.tel) + (r.instagram ? ' · @' + esc(r.instagram) : '') + '</div></div>' +
+      (r.disponibles ? '<span class="pill rose">' + r.disponibles + ' beneficio' + (r.disponibles > 1 ? 's' : '') + '</span>' : '') + '<span class="plus num" style="font-size:19px">' + r.pos + '/' + r.size + '</span></div>';
+  }).join('') + '</div>';
+}
+var searchT;
+function afterAdmin() {
+  var q = $('#q');
+  if (q) {
+    if (!('ontouchstart' in window)) q.focus();
+    q.addEventListener('input', function () {
+      S.q = q.value; clearTimeout(searchT);
+      var v = q.value.trim(), d = v.replace(/\D/g, '');
+      if (v.length < 2 || (/^\d+$/.test(v) && d.length < 3)) { S.results = null; $('#results').innerHTML = ''; return; }
+      searchT = setTimeout(function () { buscar(v); }, /^\d{4}$/.test(v) ? 0 : 350);
+    });
+    $('#fBuscar').addEventListener('submit', function (e) { e.preventDefault(); buscar(q.value.trim()); });
+  }
+  bindForms();
+}
+function buscar(v) {
+  if (!v) return;
+  S.results = 'loading'; var box = $('#results'); if (box) box.innerHTML = resultsHTML();
+  A('buscar', { q: v }).then(function (r) {
+    if (S.q && S.q.trim() !== v && !/[?&]c=/.test(v)) return;
+    S.results = r;
+    if (r.length === 1 && (/^\d{4}$/.test(v) || /[?&]c=|^[a-z0-9]{10}$/i.test(v))) return pick(r[0].id);
+    var b = $('#results'); if (b) b.innerHTML = resultsHTML();
+  }).catch(showErr);
+}
+function pick(id) {
+  S.results = null; S.q = ''; S.panel = null;
+  root.querySelector('main').innerHTML = '<div class="spin"></div>';
+  A('clienta', { id: id }).then(function (t) { S.cli = t; S.compra.prendas = 1; S.compra.monto = ''; S.compra.notas = ''; renderAdmin(); }).catch(showErr);
+  if (!S.pub || Date.now() - S.pubAt > 300000) loadPub();
+}
+function showErr(e) { toast(e.message || 'Algo salió mal'); if (S.view === 'admin') { if (e.code === 'PIN') { S.admin = null; } renderAdmin(); } }
+
+function previewLocal() {
+  if (!S.pub) return null;
+  var st = { Config: [{ Clave: 'ExtraDesde2Prendas', Valor: S.pub.extra2 }], Campanas: S.pub.campanasRaw || [] };
+  return CORE.previewCompra(st, S.compra.prendas, S.compra.canal, Date.now());
+}
+function compraHTML() {
+  var c = S.compra, pv = previewLocal();
+  return '<section class="sec"><div class="sec-h"><h3>Nueva compra</h3><button class="link" data-act="panel" data-p="">Cancelar</button></div>' +
+    '<div class="form" style="margin-top:12px">' +
+    '<div class="stepper"><button data-act="pr" data-d="-1" aria-label="Menos">−</button><div class="val num">' + c.prendas + '<small>' + plural(c.prendas, 'prenda', 'prendas') + '</small></div><button data-act="pr" data-d="1" aria-label="Más">+</button></div>' +
+    '<div class="chips" style="justify-content:center">' + [1, 2, 3, 4, 5, 6].map(function (n) { return '<button class="chip q' + (c.prendas === n ? ' on' : '') + '" data-act="prSet" data-n="' + n + '">' + n + '</button>'; }).join('') + '</div>' +
+    '<div class="field"><label>Canal</label><div class="chips">' + CORE.CANALES.map(function (k) { return '<button class="chip' + (c.canal === k ? ' on' : '') + '" data-act="canal" data-v="' + esc(k) + '">' + esc(k) + '</button>'; }).join('') + '</div></div>' +
+    '<div class="row"><div class="field"><label for="cMonto">Total <span class="opt">(opcional)</span></label><input id="cMonto" type="text" inputmode="numeric" placeholder="$" value="' + esc(c.monto) + '"></div>' +
+    '<div class="field"><label for="cNotas">Nota <span class="opt">(opcional)</span></label><input id="cNotas" type="text" value="' + esc(c.notas) + '"></div></div>' +
+    (pv ? '<div class="calc' + (pv.mult > 1 || pv.bonusCompra ? ' x2' : '') + '"><div class="tot"><span class="eyebrow">Suma</span><b class="num">+' + pv.total + '</b></div>' +
+      pv.lines.map(function (l) { return '<div class="ln"><span>' + esc(l.t) + '</span><span class="num">+' + l.n + '</span></div>'; }).join('') + '</div>' : '') +
+    '<div id="dupBox"></div>' +
+    '<button class="btn big" data-act="confirmCompra" id="cBtn">Sumar ' + (pv ? pv.total + ' stamps' : 'stamps') + '</button></div></section>';
+}
+function bonusHTML() {
+  var b = S.bonus, camp = (S.pub && S.pub.campanas || []).filter(function (c) { return c.bonusAsistencia; })[0];
+  return '<section class="sec"><div class="sec-h"><h3>+ Bonus</h3><button class="link" data-act="panel" data-p="">Cancelar</button></div>' +
+    '<div class="form" style="margin-top:12px">' +
+    '<div class="field"><label>Motivo</label><div class="chips">' + CORE.MOTIVOS_BONUS.map(function (k) { return '<button class="chip' + (b.motivo === k ? ' on' : '') + '" data-act="motivo" data-v="' + esc(k) + '">' + esc(k) + '</button>'; }).join('') + '</div></div>' +
+    (camp && b.motivo === 'Feria' ? '<div class="msg warn">' + esc(camp.nombre) + ': asistir suma +' + camp.bonusAsistencia + '.</div>' : '') +
+    '<div class="stepper"><button data-act="bq" data-d="-1" aria-label="Menos">−</button><div class="val num">+' + b.cantidad + '<small>' + plural(b.cantidad, 'stamp', 'stamps') + '</small></div><button data-act="bq" data-d="1" aria-label="Más">+</button></div>' +
+    '<div class="field"><label for="bNotas">Nota <span class="opt">(opcional)</span></label><input id="bNotas" type="text" value="' + esc(b.notas) + '"></div>' +
+    '<div id="dupBox"></div>' +
+    '<button class="btn big rose" data-act="confirmBonus" id="bBtn">Sumar bonus</button></div></section>';
+}
+function datosHTML() {
+  var t = S.cli, link = cardUrl(t.token);
+  var msg = 'Hola ' + t.nombre + '! Esta es tu Ainhoa Club Card: ' + link + ' . Guardala en tu inicio y mostrá tu QR en caja para sumar stamps.';
+  return '<section class="sec"><div class="sec-h"><h3>Datos</h3><button class="link" data-act="panel" data-p="">Cerrar</button></div>' +
+    '<form class="form" id="fEdit" style="margin-top:12px" novalidate>' +
+    '<div class="row"><div class="field"><label for="eNombre">Nombre</label><input id="eNombre" type="text" value="' + esc(t.nombre) + '"></div><div class="field"><label for="eApellido">Apellido</label><input id="eApellido" type="text" value="' + esc(t.apellido) + '"></div></div>' +
+    '<div class="field"><label for="eTel">WhatsApp</label><input id="eTel" type="tel" value="' + esc(t.telefono) + '"></div>' +
+    '<div class="row"><div class="field"><label for="eCumple">Cumple</label><input id="eCumple" type="text" inputmode="numeric" value="' + esc(t.cumple) + '" placeholder="dd/mm"></div><div class="field"><label for="eIg">Instagram</label><input id="eIg" type="text" value="' + esc(t.instagram) + '"></div></div>' +
+    '<div class="field"><label for="eNotas">Notas internas</label><input id="eNotas" type="text" value="' + esc(t.notasClienta) + '"></div>' +
+    '<button class="btn ghost" type="submit" id="eBtn">Guardar cambios</button></form>' +
+    '<div class="stack" style="margin-top:18px"><div class="eyebrow">Link de su tarjeta</div><div class="small" style="overflow-wrap:anywhere;user-select:all">' + esc(link) + '</div>' +
+    '<div class="row"><a class="btn" href="' + esc(waLink(t.telefono, msg)) + '" target="_blank" rel="noopener">Enviar por WhatsApp</a><button class="btn ghost" data-act="copy" data-v="' + esc(link) + '">Copiar link</button></div>' +
+    '<div class="small">Clienta desde ' + esc(t.desde) + ' · ' + t.compras + ' compras · ' + t.prendas + ' prendas · ' + t.completas + ' tarjetas completas</div></div></section>';
+}
+
+/* ---------- NUEVA CLIENTA ---------- */
+function nuevaHTML() {
+  return '<div class="eyebrow">Nueva clienta</div><h2 style="margin-top:4px">Crear Club Card</h2>' +
+    '<form class="form" id="fNueva" style="margin-top:18px" novalidate>' +
+    '<div class="field"><label for="nNombre">Nombre</label><input id="nNombre" type="text" required></div>' +
+    '<div class="field"><label for="nTel">WhatsApp</label><input id="nTel" type="tel" inputmode="tel" placeholder="381 555 1234" required></div>' +
+    '<div class="row"><div class="field"><label for="nApellido">Apellido <span class="opt">(opc.)</span></label><input id="nApellido" type="text"></div>' +
+    '<div class="field"><label for="nIg">Instagram <span class="opt">(opc.)</span></label><input id="nIg" type="text" autocapitalize="off"></div></div>' +
+    '<div class="field"><label for="nCumple">Cumple <span class="opt">(opc., día/mes)</span></label><input id="nCumple" type="text" inputmode="numeric" placeholder="14/03" maxlength="5"></div>' +
+    '<div class="msg bad" id="nErr"></div>' +
+    '<button class="btn big" type="submit" id="nBtn">Crear y cargar compra</button></form>' +
+    '<p class="small" style="margin-top:14px">Si hay fila en caja, mostrale el <button class="link" data-act="altaQR">QR de alta</button> y que la cree ella desde su celular.</p>';
+}
+function bindForms() {
+  var f = $('#fNueva');
+  if (f) {
+    var cu = $('#nCumple'); cu.addEventListener('input', function () { var v = cu.value.replace(/\D/g, '').slice(0, 4); cu.value = v.length > 2 ? v.slice(0, 2) + '/' + v.slice(2) : v; });
+    f.addEventListener('submit', function (e) {
+      e.preventDefault(); var b = $('#nBtn'); b.disabled = true; b.textContent = 'Creando…';
+      A('crear', { nombre: $('#nNombre').value, apellido: $('#nApellido').value, telefono: $('#nTel').value, cumple: $('#nCumple').value, instagram: $('#nIg').value, opId: opId() })
+        .then(function (r) {
+          S.cli = r.tarjeta; S.tab = 'caja'; S.compra.prendas = 1; S.compra.monto = ''; S.compra.notas = '';
+          S.panel = 'compra'; renderAdmin();
+          toast(r.existe ? 'Ese WhatsApp ya tenía Club Card: ' + r.tarjeta.nombre + '.' : 'Club Card creada. Cargá la compra de hoy.');
+        })
+        .catch(function (er) { $('#nErr').textContent = er.message; b.disabled = false; b.textContent = 'Crear y cargar compra'; });
+    });
+  }
+  var fe = $('#fEdit');
+  if (fe) fe.addEventListener('submit', function (e) {
+    e.preventDefault(); var b = $('#eBtn'); b.disabled = true;
+    A('editarClienta', { id: S.cli.id, nombre: $('#eNombre').value, apellido: $('#eApellido').value, telefono: $('#eTel').value, cumple: $('#eCumple').value, instagram: $('#eIg').value, notas: $('#eNotas').value, opId: opId() })
+      .then(function (t) { S.cli = t; toast('Datos guardados.'); renderAdmin(); }).catch(function (er) { b.disabled = false; toast(er.message); });
+  });
+  var fc = $('#fCamp');
+  if (fc) fc.addEventListener('submit', function (e) { e.preventDefault(); guardarCamp(); });
+  var m = $('#cMonto'); if (m) m.addEventListener('input', function () { S.compra.monto = m.value.replace(/\D/g, ''); });
+  var n = $('#cNotas'); if (n) n.addEventListener('input', function () { S.compra.notas = n.value; });
+  var bn = $('#bNotas'); if (bn) bn.addEventListener('input', function () { S.bonus.notas = bn.value; });
+}
+
+/* ---------- resultado de compra/bonus ---------- */
+function confirmCompra(force) {
+  var b = $('#cBtn'); if (b) { b.disabled = true; b.textContent = 'Sumando…'; }
+  var id = S.pendingOp || (S.pendingOp = opId());
+  A('compra', { id: S.cli.id, prendas: S.compra.prendas, canal: S.compra.canal, monto: S.compra.monto, notas: S.compra.notas, opId: force ? id + 'f' : id, force: force ? 'SI' : '' })
+    .then(function (r) { S.pendingOp = null; S.cli = r.tarjeta; resultSheet(r, 'compra'); })
+    .catch(function (e) { onDup(e, 'compra'); });
+}
+function confirmBonus(force) {
+  var b = $('#bBtn'); if (b) { b.disabled = true; b.textContent = 'Sumando…'; }
+  var id = S.pendingOp || (S.pendingOp = opId());
+  A('bonus', { id: S.cli.id, motivo: S.bonus.motivo, cantidad: S.bonus.cantidad, notas: S.bonus.notas, opId: force ? id + 'f' : id, force: force ? 'SI' : '' })
+    .then(function (r) { S.pendingOp = null; S.cli = r.tarjeta; resultSheet(r, 'bonus'); })
+    .catch(function (e) { onDup(e, 'bonus'); });
+}
+function onDup(e, kind) {
+  if (e.code !== 'DUP') { S.pendingOp = null; renderAdmin(); toast(e.message); return; }
+  var box = $('#dupBox'), b = $(kind === 'compra' ? '#cBtn' : '#bBtn');
+  if (b) b.hidden = true;
+  if (box) box.innerHTML = '<div class="msg warn">' + esc(e.message) + '</div><div class="row" style="margin-top:10px"><button class="btn ghost" data-act="panel" data-p="">No, cancelar</button><button class="btn" data-act="' + (kind === 'compra' ? 'forceCompra' : 'forceBonus') + '">Sí, sumar</button></div>';
+}
+function resultSheet(r, kind) {
+  var t = r.tarjeta, last = t.slots[t.slots.length - 1] || 'compra';
+  var unl = (r.desbloqueados || []).map(function (u) { return '<div class="unlock">Desbloqueó <b>' + esc(u.nombre) + '</b>' + (u.vence ? '<div class="small" style="color:inherit">Vence el ' + esc(u.vence) + '. Puede usarlo hoy o en su próxima compra.</div>' : '') + '</div>'; }).join('');
+  S.panel = null; renderAdmin();
+  sheet('<div class="result"><div class="bigstamp stamp new" style="--rot:-6deg">' + stampSVG(kind === 'bonus' ? kindOfMotivo(S.bonus.motivo) : kindOfMotivo(S.compra.canal, 'compra')) + '</div>' +
+    '<h2>Sumó ' + r.sumados + ' ' + plural(r.sumados, 'stamp', 'stamps') + '</h2>' +
+    (r.preview && (r.preview.mult > 1 || r.preview.bonusCompra) ? '<span class="pill rose">Esta compra sumó ' + (r.preview.mult > 1 ? 'x' + r.preview.mult : 'extra') + '</span>' : '') +
+    (r.completo ? '<div class="unlock"><b>Completó su tarjeta.</b> Arranca una nueva' + (t.vip ? ' · ahora es VIP' : '') + '.</div>' : '') +
+    '<div class="small num" style="font-size:14px;color:var(--ink2)">' + esc(t.nombre) + ' · <b>' + t.pos + '/' + t.size + '</b> · ' + nextText(t, 'ella') + '</div>' + unl +
+    '<div class="row" style="width:100%;margin-top:10px"><button class="btn ghost" data-act="closeSheet">Ver clienta</button><button class="btn" data-act="doneNext">Siguiente</button></div></div>');
+}
+
+/* ---------- CAMPAÑAS ---------- */
+function toLocalInput(ms) { var d = new Date(ms); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); }
+function campsHTML() {
+  if (S.campEdit) return campFormHTML(S.campEdit);
+  if (!S.camps) { A('campanas').then(function (r) { S.camps = r; renderAdmin(); }).catch(showErr); return '<div class="spin"></div>'; }
+  var pillCls = { Activa: 'ok', Programada: 'warn', Terminada: '', Pausada: '' };
+  return '<div class="eyebrow">Campañas</div><h2 style="margin-top:4px">Bonus y stamps dobles</h2>' +
+    '<p class="small">Mientras una campaña está activa, la caja la aplica sola al cargar la compra.</p>' +
+    '<div class="stack" style="margin-top:16px"><button class="btn big rose" data-act="campQuick">✦ Hoy hay Bonus Stamp</button><button class="btn ghost" data-act="campNew">Nueva campaña con fechas</button></div>' +
+    '<div class="list" style="margin-top:18px">' + (S.camps.length ? S.camps.map(function (c, i) {
+      return '<div class="li tap" data-act="campEdit" data-i="' + i + '"><div class="grow"><div class="t">' + esc(c.nombre) + '</div><div class="s">' + esc(c.desdeTxt) + ' → ' + esc(c.hastaTxt) + '</div>' +
+        '<div class="s">' + (c.mult > 1 ? 'Compras x' + c.mult : 'Sin multiplicador') + (c.bonusCompra ? ' · +' + c.bonusCompra + ' por compra' : '') + (c.bonusAsistencia ? ' · asistencia +' + c.bonusAsistencia : '') + ' · ' + esc(c.canales) + '</div></div>' +
+        '<span class="pill ' + (pillCls[c.estado] || '') + '">' + esc(c.estado) + '</span></div>';
+    }).join('') : '<div class="empty">Todavía no hay campañas.</div>') + '</div>';
+}
+function campFormHTML(c) {
+  var canSel = c.canales && c.canales !== 'Todos' ? c.canales.split(',').map(function (x) { return x.trim(); }) : [];
+  return '<div class="sec-h"><h2>' + (c.id ? 'Editar campaña' : 'Nueva campaña') + '</h2><button class="link" data-act="campCancel">Cancelar</button></div>' +
+    '<form class="form" id="fCamp" style="margin-top:14px" novalidate>' +
+    '<div class="field"><label for="kNombre">Nombre</label><input id="kNombre" type="text" value="' + esc(c.nombre || '') + '" placeholder="Feria Día de la Madre"></div>' +
+    '<div class="row"><div class="field"><label for="kDesde">Desde</label><input id="kDesde" type="datetime-local" value="' + toLocalInput(c.desde) + '"></div>' +
+    '<div class="field"><label for="kHasta">Hasta</label><input id="kHasta" type="datetime-local" value="' + toLocalInput(c.hasta) + '"></div></div>' +
+    '<div class="field"><label>Las compras suman</label><div class="chips">' + [1, 2, 3].map(function (m) { return '<button type="button" class="chip' + (c.mult === m ? ' on' : '') + '" data-act="kMult" data-v="' + m + '">' + (m === 1 ? 'Normal' : 'x' + m) + '</button>'; }).join('') + '</div></div>' +
+    '<div class="row"><div class="field"><label for="kBC">+ por compra</label><input id="kBC" type="number" min="0" max="5" inputmode="numeric" value="' + (c.bonusCompra || 0) + '"></div>' +
+    '<div class="field"><label for="kBA">+ por asistir</label><input id="kBA" type="number" min="0" max="5" inputmode="numeric" value="' + (c.bonusAsistencia || 0) + '"></div></div>' +
+    '<div class="field"><label>Canales <span class="opt">(ninguno = todos)</span></label><div class="chips">' + CORE.CANALES.map(function (k) { return '<button type="button" class="chip' + (canSel.indexOf(k) >= 0 ? ' on' : '') + '" data-act="kCanal" data-v="' + esc(k) + '">' + esc(k) + '</button>'; }).join('') + '</div></div>' +
+    '<div class="field"><label for="kMsg">Mensaje para clientas</label><input id="kMsg" type="text" value="' + esc(c.mensaje || '') + '" placeholder="Hoy tu compra suma doble."></div>' +
+    '<label class="row" style="align-items:center;gap:10px;flex:none"><input id="kActiva" type="checkbox" style="width:22px;height:22px;flex:none"' + (c.activa !== false ? ' checked' : '') + '><span style="flex:1">Activa</span></label>' +
+    '<div class="msg bad" id="kErr"></div><button class="btn big" type="submit" id="kBtn">Guardar campaña</button></form>';
+}
+function readCampForm() {
+  var c = S.campEdit;
+  c.nombre = $('#kNombre').value; c.mensaje = $('#kMsg').value; c.bonusCompra = +$('#kBC').value || 0; c.bonusAsistencia = +$('#kBA').value || 0;
+  c.desde = new Date($('#kDesde').value).getTime() || c.desde; c.hasta = new Date($('#kHasta').value).getTime() || c.hasta; c.activa = $('#kActiva').checked;
+}
+function guardarCamp() {
+  readCampForm(); var c = S.campEdit, b = $('#kBtn'); b.disabled = true;
+  A('campanaGuardar', { id: c.id || '', nombre: c.nombre, desde: c.desde, hasta: c.hasta, mult: c.mult, bonusCompra: c.bonusCompra, bonusAsistencia: c.bonusAsistencia, canales: c.canales || 'Todos', mensaje: c.mensaje, activa: c.activa ? 'SI' : 'NO', opId: opId() })
+    .then(function (r) { S.camps = r; S.campEdit = null; toast('Campaña guardada.'); loadPub(); renderAdmin(); })
+    .catch(function (e) { $('#kErr').textContent = e.message; b.disabled = false; });
+}
+
+/* ---------- NÚMEROS ---------- */
+var REF_ANTES = [0.61, 0.15, 0.09, 0.15]; // compras de 1, 2, 3, 4+ prendas en Ventas mayo–oct 2026
+function numsHTML() {
+  if (!S.stats || S.stats.dias !== S.dias) {
+    A('stats', { dias: S.dias }).then(function (r) { S.stats = r; renderAdmin(); }).catch(showErr);
+    return '<div class="spin"></div>';
+  }
+  var s = S.stats, dTot = s.distribucion.reduce(function (a, b) { return a + b; }, 0) || 1;
+  return '<div class="sec-h" style="border:0"><div><div class="eyebrow">Números</div><h2 style="margin-top:4px">Cómo va el Club</h2></div>' +
+    '<div class="seg"><button class="' + (S.dias === 30 ? 'on' : '') + '" data-act="dias" data-v="30">30 días</button><button class="' + (S.dias === 0 ? 'on' : '') + '" data-act="dias" data-v="0">Todo</button></div></div>' +
+    '<div class="kpis" style="margin-top:12px">' +
+    kpi(s.clientas, 'clientas registradas') + kpi(s.activas, 'activas (últimos días)') +
+    kpi(dec(s.prendasPorCompra), 'prendas por compra') + kpi(pct(s.vuelven), 'vuelven a comprar') +
+    kpi(s.compras, 'compras cargadas') + kpi(dec(s.comprasPorClienta), 'compras por clienta') +
+    kpi(s.stampsCompra, 'stamps por prendas') + kpi(s.stampsBonus, 'stamps bonus') +
+    kpi(s.beneficios.canjeados + '/' + s.beneficios.desbloqueados, 'beneficios usados') + kpi(s.stampsFeria, 'stamps en feria') +
+    (s.monto.compras ? kpi(money(s.monto.ticket), 'ticket promedio') + kpi(s.nuevas, 'clientas nuevas') : kpi(s.nuevas, 'clientas nuevas') + kpi(s.beneficios.disponibles, 'beneficios sin usar')) +
+    '</div>' +
+    '<section class="sec"><div class="sec-h"><h3>Prendas por compra</h3><span class="small">línea rosa: antes del Club</span></div><div class="bars">' +
+    ['1 prenda', '2 prendas', '3 prendas', '4 o más'].map(function (l, i) {
+      var v = s.distribucion[i] / dTot;
+      return '<div class="bar"><span>' + l + '</span><div class="tr"><div class="fl" style="width:' + (v * 100) + '%"></div><div class="ref" style="left:' + (REF_ANTES[i] * 100) + '%"></div></div><span class="v">' + pct(v) + '</span></div>';
+    }).join('') + '</div><p class="small" style="margin-top:10px">Antes de la Club Card (ventas mayo–octubre): 61% de las compras eran de 1 prenda.</p></section>' +
+    '<section class="sec"><div class="sec-h"><h3>Canales</h3></div>' + table(['Canal', 'Compras', 'Prendas'], s.canales.map(function (c) { return [c.canal, c.compras, c.prendas]; })) + '</section>' +
+    '<section class="sec"><div class="sec-h"><h3>Campañas</h3></div>' + table(['Campaña', 'Compras', 'Prendas', 'Stamps extra'], s.campanas.map(function (c) { return [c.nombre, c.compras, c.prendas, c.extra]; })) + '</section>' +
+    '<section class="sec"><div class="sec-h"><h3>Clientas más frecuentes</h3></div>' + table(['Clienta', 'Compras', 'Prendas'], s.top.map(function (c) { return [c.nombre + ' · ' + c.numero, c.compras, c.prendas]; })) + '</section>' +
+    '<section class="sec"><div class="sec-h"><h3>Beneficios</h3></div>' + table(['Beneficio', 'Desbloqueados', 'Usados'], s.beneficios.porBeneficio.map(function (b) { return [b.nombre, b.desbloqueados, b.canjeados]; })) + '</section>';
+}
+function kpi(v, l) { return '<div class="kpi"><b>' + v + '</b><span>' + esc(l) + '</span></div>'; }
+function table(h, rows) {
+  if (!rows.length) return '<div class="empty">Sin datos todavía.</div>';
+  return '<div style="overflow-x:auto"><table class="tbl"><thead><tr>' + h.map(function (x) { return '<th>' + esc(x) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+    rows.map(function (r) { return '<tr>' + r.map(function (x) { return '<td>' + esc(x) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
+}
+
+/* ---------- ESCÁNER QR ---------- */
+var scanStream = null, scanRAF = null;
+function loadJsQR() {
+  if (window.jsQR) return Promise.resolve();
+  return new Promise(function (ok, ko) { var s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
+}
+function openScan() {
+  sheet('<div class="sheet-h"><h2>Escanear QR</h2><button class="x" data-act="closeSheet" aria-label="Cerrar">×</button></div><div class="scan"><video id="scanV" playsinline muted></video></div><p class="small" id="scanMsg" style="text-align:center">Apuntá al QR de la clienta.</p>');
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return scanFail();
+  Promise.all([loadJsQR(), navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false })]).then(function (res) {
+    scanStream = res[1]; var v = $('#scanV'); if (!v) return stopScan();
+    v.srcObject = scanStream; v.play();
+    var c = document.createElement('canvas'), ctx = c.getContext('2d', { willReadFrequently: true });
+    (function tick() {
+      if (!scanStream) return;
+      if (v.readyState === v.HAVE_ENOUGH_DATA) {
+        var w = 480, h = Math.round(w * v.videoHeight / v.videoWidth); c.width = w; c.height = h; ctx.drawImage(v, 0, 0, w, h);
+        var code = jsQR(ctx.getImageData(0, 0, w, h).data, w, h, { inversionAttempts: 'dontInvert' });
+        if (code && code.data) {
+          var m = code.data.match(/[?&]c=([a-z0-9]+)/i);
+          if (m) { closeSheet(); if (navigator.vibrate) navigator.vibrate(40); S.q = ''; buscar('?c=' + m[1]); return; }
+          if (/[?&]alta/.test(code.data)) { var mm = $('#scanMsg'); if (mm) mm.textContent = 'Ese es el QR de alta, no el de una tarjeta.'; }
+        }
+      }
+      scanRAF = requestAnimationFrame(tick);
+    })();
+  }).catch(scanFail);
+}
+function scanFail() { var m = $('#scanMsg'); if (m) m.textContent = 'No pude abrir la cámara. Buscala por los últimos 4 números de su celular.'; }
+function stopScan() { if (scanRAF) cancelAnimationFrame(scanRAF); scanRAF = null; if (scanStream) scanStream.getTracks().forEach(function (t) { t.stop(); }); scanStream = null; }
+
+/* ============================================================
+   ACCIONES (un solo manejador de toques)
+   ============================================================ */
+var ACT = {
+  toHome: function () { closeSheet(); go('home'); },
+  toAlta: function () { if (!S.pub) api('publico').then(function (r) { S.pub = r; }).catch(function () {}); go('alta'); },
+  toAdmin: function () { go('admin'); },
+  demoCard: function () { api('buscar', { pin: '1234', q: 'Sofía' }).then(function (r) { return api('clienta', { pin: '1234', id: r[0].id }); }).then(function (t) { S.token = t.token; S.card = null; go('card'); }); },
+  retryCard: function () { S.card = null; renderCard(); },
+  qr: openQR,
+  closeSheet: closeSheet,
+  logout: function () { S.admin = null; S.cli = null; try { sessionStorage.removeItem('cc_admin'); } catch (e) {} go(DEMO ? 'home' : 'admin'); },
+  tab: function (el) { S.tab = el.dataset.tab; S.panel = null; if (S.tab === 'camp') { S.camps = null; S.campEdit = null; } if (S.tab === 'num') S.stats = null; renderAdmin(); window.scrollTo(0, 0); },
+  scan: openScan,
+  pick: function (el) { pick(el.dataset.id); },
+  clearCli: function () { S.cli = null; S.panel = null; renderAdmin(); },
+  panel: function (el) {
+    S.panel = el.dataset.p || null; S.pendingOp = null;
+    if (S.panel === 'bonus') { var camp = (S.pub && S.pub.campanas || []).filter(function (c) { return c.bonusAsistencia; })[0]; S.bonus = { motivo: camp ? 'Feria' : 'El Círculo', cantidad: camp ? camp.bonusAsistencia : 1, notas: '' }; }
+    if (S.panel === 'compra' && (!S.pub || Date.now() - S.pubAt > 300000)) loadPub().then(function () { if (S.panel === 'compra') renderAdmin(); });
+    renderAdmin();
+  },
+  pr: function (el) { S.compra.prendas = Math.max(1, Math.min(40, S.compra.prendas + (+el.dataset.d))); renderAdmin(); },
+  prSet: function (el) { S.compra.prendas = +el.dataset.n; renderAdmin(); },
+  canal: function (el) { S.compra.canal = el.dataset.v; lsSet('cc_canal', el.dataset.v); renderAdmin(); },
+  confirmCompra: function () { confirmCompra(false); },
+  forceCompra: function () { confirmCompra(true); },
+  motivo: function (el) { S.bonus.motivo = el.dataset.v; renderAdmin(); },
+  bq: function (el) { S.bonus.cantidad = Math.max(1, Math.min(10, S.bonus.cantidad + (+el.dataset.d))); renderAdmin(); },
+  confirmBonus: function () { confirmBonus(false); },
+  forceBonus: function () { confirmBonus(true); },
+  doneNext: function () { closeSheet(); S.cli = null; S.panel = null; renderAdmin(); },
+  canjear: function (el) {
+    var b = S.cli.disponibles.filter(function (x) { return x.id === el.dataset.id; })[0];
+    sheet('<div class="sheet-h"><h2>Canjear</h2><button class="x" data-act="closeSheet" aria-label="Cerrar">×</button></div>' +
+      '<p style="margin:0 0 6px">¿Canjear <b>' + esc(b.nombre) + '</b> de ' + esc(S.cli.nombre) + '?</p><p class="small">' + esc(b.descripcion) + '</p>' +
+      '<div class="field" style="margin-top:12px"><label for="jNotas">Nota <span class="opt">(opcional, ej: qué regalo se llevó)</span></label><input id="jNotas" type="text"></div>' +
+      '<div class="msg bad" id="jErr" style="margin-top:10px"></div>' +
+      '<div class="row" style="margin-top:14px"><button class="btn ghost" data-act="closeSheet">Cancelar</button><button class="btn rose" data-act="doCanje" data-id="' + esc(b.id) + '" id="jBtn">Canjear</button></div>');
+  },
+  doCanje: function (el) {
+    var b = $('#jBtn'); b.disabled = true;
+    A('canjear', { canjeId: el.dataset.id, notas: $('#jNotas').value, opId: opId() })
+      .then(function (r) { S.cli = r.tarjeta; closeSheet(); renderAdmin(); toast(r.beneficio + ' canjeado.'); })
+      .catch(function (e) { $('#jErr').textContent = e.message; b.disabled = false; });
+  },
+  anular: function (el) {
+    sheet('<div class="sheet-h"><h2>Anular movimiento</h2><button class="x" data-act="closeSheet" aria-label="Cerrar">×</button></div>' +
+      '<p class="small">El movimiento queda en el historial tachado y se descuentan sus stamps. Si había desbloqueado un beneficio sin usar, se anula.</p>' +
+      '<div class="field" style="margin-top:12px"><label for="xMotivo">Motivo</label><input id="xMotivo" type="text" placeholder="Ej: se cargó a otra clienta"></div>' +
+      '<div class="msg bad" id="xErr" style="margin-top:10px"></div>' +
+      '<div class="row" style="margin-top:14px"><button class="btn ghost" data-act="closeSheet">Cancelar</button><button class="btn" data-act="doAnular" data-id="' + esc(el.dataset.id) + '" id="xBtn">Anular</button></div>');
+  },
+  doAnular: function (el) {
+    var b = $('#xBtn'); b.disabled = true;
+    A('anular', { movId: el.dataset.id, motivo: $('#xMotivo').value, opId: opId() })
+      .then(function (r) { S.cli = r.tarjeta; closeSheet(); renderAdmin(); toast('Movimiento anulado.'); })
+      .catch(function (e) { $('#xErr').textContent = e.message; b.disabled = false; });
+  },
+  copy: function (el) {
+    var v = el.dataset.v;
+    var done = function () { toast('Link copiado.'); };
+    if (navigator.clipboard) navigator.clipboard.writeText(v).then(done, function () { toast('Mantené apretado el link para copiarlo.'); });
+    else toast('Mantené apretado el link para copiarlo.');
+  },
+  altaQR: function () {
+    sheet('<div class="sheet-h"><h2>QR de alta</h2><button class="x" data-act="closeSheet" aria-label="Cerrar">×</button></div>' +
+      '<div class="qrbox"><div class="qr">' + qrSVG(baseUrl() + '?alta') + '</div><div class="eyebrow">Escaneá y creá tu Club Card</div>' +
+      '<p class="small" style="text-align:center;margin:0">La clienta lo escanea con la cámara del celular, completa nombre y WhatsApp, y te muestra su QR.</p></div>');
+  },
+  campQuick: function () {
+    var now = Date.now(), fin = new Date(); fin.setHours(23, 59, 0, 0);
+    S.campEdit = { nombre: 'Bonus Stamp', desde: now, hasta: fin.getTime(), mult: 2, bonusCompra: 0, bonusAsistencia: 0, canales: 'Todos', mensaje: 'Hoy tu compra suma doble.', activa: true };
+    renderAdmin();
+  },
+  campNew: function () { var now = Date.now(); S.campEdit = { nombre: '', desde: now, hasta: now + 86400000, mult: 2, bonusCompra: 0, bonusAsistencia: 1, canales: 'Todos', mensaje: '', activa: true }; renderAdmin(); },
+  campEdit: function (el) { var c = S.camps[+el.dataset.i]; S.campEdit = JSON.parse(JSON.stringify(c)); renderAdmin(); },
+  campCancel: function () { S.campEdit = null; renderAdmin(); },
+  kMult: function (el) { readCampForm(); S.campEdit.mult = +el.dataset.v; renderAdmin(); },
+  kCanal: function (el) {
+    readCampForm(); var c = S.campEdit, sel = c.canales && c.canales !== 'Todos' ? c.canales.split(',').map(function (x) { return x.trim(); }) : [];
+    var i = sel.indexOf(el.dataset.v); if (i >= 0) sel.splice(i, 1); else sel.push(el.dataset.v);
+    c.canales = sel.length ? sel.join(', ') : 'Todos'; renderAdmin();
+  },
+  dias: function (el) { S.dias = +el.dataset.v; renderAdmin(); }
+};
+document.addEventListener('click', function (e) {
+  var el = e.target.closest('[data-act]');
+  if (!el || !ACT[el.dataset.act]) return;
+  if (el.tagName === 'BUTTON' && el.type !== 'submit') e.preventDefault();
+  ACT[el.dataset.act](el);
+});
+
+/* ---------- PWA: manifest según la página (así "Agregar a inicio" guarda TU tarjeta) ---------- */
+function setManifest() {
+  try {
+    var start = location.href, abs = function (p) { return new URL(p, baseUrl()).href; };
+    var m = { name: S.view === 'admin' ? 'Club Card Equipo' : 'Ainhoa Club Card', short_name: S.view === 'admin' ? 'Club Equipo' : 'Club Card', start_url: start, scope: baseUrl(), display: 'standalone',
+      background_color: '#FFFFFF', theme_color: '#252A1C', icons: [{ src: abs('icon-192.png'), sizes: '192x192', type: 'image/png' }, { src: abs('icon-512.png'), sizes: '512x512', type: 'image/png' }, { src: abs('icon-512.png'), sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
+    var l = $('link[rel=manifest]'); if (!l) { l = document.createElement('link'); l.rel = 'manifest'; document.head.appendChild(l); }
+    l.href = 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(m));
+  } catch (e) {}
+}
+
+/* ---------- arranque ---------- */
+(function init() {
+  var q = {};
+  try { new URLSearchParams(location.search).forEach(function (v, k) { q[k] = v; }); } catch (e) {}
+  try { var a = sessionStorage.getItem('cc_admin'); if (a) S.admin = JSON.parse(a); } catch (e) {}
+  if (q.c) { S.token = q.c; lsSet('cc_token', q.c); go('card'); }
+  else if ('alta' in q) { go('alta'); api('publico').then(function (r) { S.pub = r; }).catch(function () {}); }
+  else if ('equipo' in q || 'admin' in q) { go('admin'); if (S.admin) loadPub(); }
+  else if (lsGet('cc_token') && !DEMO) { S.token = lsGet('cc_token'); go('card'); }
+  else go('home');
+  if (!DEMO && 'serviceWorker' in navigator) { try { navigator.serviceWorker.register('sw.js').catch(function () {}); } catch (e) {} }
+  setInterval(function () { if (S.view === 'admin' && S.admin) loadPub(); }, 300000);
+})();
+</script>
+</body>
+</html>
